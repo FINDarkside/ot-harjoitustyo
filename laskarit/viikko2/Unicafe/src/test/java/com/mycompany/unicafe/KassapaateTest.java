@@ -183,7 +183,7 @@ public class KassapaateTest {
         kassa.syoEdullisesti(k);
         assertEquals(260, k.saldo());
     }
-    
+
     @Test
     public void edullisenAteriankorttiOstoLiianPienellaSaldollaEiVahennaKortinSaldoa() {
         Maksukortti k = new Maksukortti(100);
@@ -240,12 +240,40 @@ public class KassapaateTest {
         kassa.syoMaukkaasti(k);
         assertEquals(100, k.saldo());
     }
-    
+
     @Test
     public void maukkaanAteriankorttiOstoLiianPienellaSaldollaEiVahennaKortinSaldoa() {
         Maksukortti k = new Maksukortti(100);
         kassa.syoMaukkaasti(k);
         assertEquals(100, k.saldo());
+    }
+
+    @Test
+    public void kortilleRahanLatausKasvattaaSaldoaOikein() {
+        Maksukortti k = new Maksukortti(100);
+        kassa.lataaRahaaKortille(k, 100);
+        assertEquals(200, k.saldo());
+    }
+
+    @Test
+    public void kortilleRahanLatausKasvattaaKassanSaldoa() {
+        Maksukortti k = new Maksukortti(100);
+        kassa.lataaRahaaKortille(k, 100);
+        assertEquals(100100, kassa.kassassaRahaa());
+    }
+
+    @Test
+    public void kortilleNegatiivisenMaaranLatausEiMuutaSaldoa() {
+        Maksukortti k = new Maksukortti(100);
+        kassa.lataaRahaaKortille(k, -50);
+        assertEquals(100, k.saldo());
+    }
+
+    @Test
+    public void kortilleNegatiivisenMaaranLatausEiMuutaKassanSaldoa() {
+        Maksukortti k = new Maksukortti(100);
+        kassa.lataaRahaaKortille(k, -50);
+        assertEquals(100000, kassa.kassassaRahaa());
     }
 
 }
