@@ -1,5 +1,11 @@
 # Ohjelmistotekniikka 2019 - harjoitustyö
 
+## Dokumentaatio
+
+[Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
+
+[Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
+
 ## Tehtävät
 
 ### Viikko 1
