@@ -6,10 +6,22 @@
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
 
-## Tehtävät
+## Komentorivitoiminnot
 
-### Viikko 1
+**Käynnistys**
 
-[gitlog.txt](laskarit/viikko1/gitlog.txt)
+```
+mvn compile exec:java "-Dexec.mainClass=tetris.MainApp"
+```
 
-[komentorivi.txt](laskarit/viikko1/komentorivi.txt)
+**Testien ajo**
+
+```
+mvn test
+```
+
+**Testikattavuusraportti**
+
+```
+mvn test jacoco:report
+```
