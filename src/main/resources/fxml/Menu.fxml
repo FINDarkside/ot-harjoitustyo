@@ -7,8 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="543.0" prefWidth="752.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" 
+            prefHeight="543.0" prefWidth="752.0" fx:controller="tetris.ui.MenuController"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -16,14 +17,18 @@
                <children>
                   <AnchorPane prefHeight="232.0" prefWidth="400.0" VBox.vgrow="NEVER">
                      <children>
-                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="351.0" text="Tetris" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="351.0" 
+                               text="Tetris" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <font>
                               <Font size="27.0" />
                            </font>
                         </Label>
-                        <Button layoutX="52.0" layoutY="64.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="128.0" text="Play" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button layoutX="52.0" layoutY="129.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="128.0" text="Scoreboard" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                        <Button layoutX="52.0" layoutY="199.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="128.0" text="Settings" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button layoutX="52.0" layoutY="64.0" mnemonicParsing="false" prefHeight="39.0" 
+                                prefWidth="128.0" text="Play" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button layoutX="52.0" layoutY="129.0" mnemonicParsing="false" prefHeight="39.0" 
+                                prefWidth="128.0" text="Scoreboard" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                        <Button layoutX="52.0" layoutY="199.0" mnemonicParsing="false" prefHeight="39.0" 
+                                prefWidth="128.0" text="Settings" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </children>
