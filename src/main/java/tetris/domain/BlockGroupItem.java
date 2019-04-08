@@ -6,6 +6,12 @@ public class BlockGroupItem {
     private int relativeX;
     private int relativeY;
 
+    /**
+     * Creates new {@code BlockGroupItem} of the given block.
+     * @param block Block this object contains
+     * @param relativeX Relative x coordinate, used when rotating the group around (0,0)
+     * @param relativeY Relative y coordinate, used when rotating the group around (0,0)
+     */
     public BlockGroupItem(Block block, int relativeX, int relativeY) {
         this.block = block;
         this.relativeX = relativeX;

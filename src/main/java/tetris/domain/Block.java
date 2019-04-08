@@ -6,6 +6,11 @@ public class Block {
 
     private String color;
 
+    /**
+     * Creates new block.
+     *
+     * @param color Color of the block
+     */
     public Block(String color) {
         this.color = color;
     }

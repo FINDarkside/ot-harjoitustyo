@@ -6,6 +6,13 @@ public class BlockGroup {
     private float x;
     private float y;
 
+    /**
+     * Creates new {@code BlockGroup}.
+     *
+     * @param blocks Array of {@code BlockGroupItem}
+     * @param x x coordinate of the group
+     * @param y y coordinate of the group
+     */
     public BlockGroup(BlockGroupItem[] blocks, float x, float y) {
         this.blocks = blocks;
         this.x = x;
@@ -13,7 +20,7 @@ public class BlockGroup {
     }
 
     /**
-     * Rotates the block group clockwise
+     * Rotates the block group clockwise.
      */
     public void rotateClockwise() {
         for (BlockGroupItem blockItem : blocks) {

@@ -6,6 +6,12 @@ public class GameBoard {
     private final int height;
     private Block[][] board;
 
+    /**
+     * Creates new GameBoard.
+     *
+     * @param width Width of game board in blocks
+     * @param height Height of game board in blocks
+     */
     public GameBoard(int width, int height) {
         this.width = width;
         this.height = height;
@@ -16,13 +22,23 @@ public class GameBoard {
         return board;
     }
 
+    /**
+     * Returns the block at given coordinates, or null if the block does not
+     * exist.
+     *
+     * @param x x coordinate
+     * @param y y coordinate
+     * @return the block at given coordinates, or null if the block does not
+     */
     public Block getBlock(int x, int y) {
         return board[y][x];
     }
 
     /**
+     * Checks if the row on {@code y} is full horizontally.
+     *
      * @param y Target row, 0 is the bottom row
-     * @return Returns true if target row is full
+     * @return true if target row is full
      */
     public boolean isRowFull(int y) {
         if (y < 0 || y >= height) {
@@ -38,7 +54,7 @@ public class GameBoard {
 
     /**
      * Removes all blocks from target row. All blocks above the target row will
-     * move one unit down
+     * move one unit down.
      *
      * @param y Row to clear, 0 is the bottom row
      */
@@ -57,7 +73,7 @@ public class GameBoard {
     /**
      * Checks if the given block group collides with static blocks.
      *
-     * @param group
+     * @param group Group to be checked against
      * @return value indicating whether the given block group collides with
      * static blocks.
      */
