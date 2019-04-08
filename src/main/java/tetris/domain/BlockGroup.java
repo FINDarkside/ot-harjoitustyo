@@ -53,12 +53,12 @@ public class BlockGroup {
         this.y = y;
     }
 
-    public int getBlockX(Block b) {
+    public int getBlockCellX(Block b) {
         return (int) Math.floor(this.x) + b.getRelativeX();
     }
 
-    public int getBlockY(Block b) {
-        return (int) Math.floor(this.y) + b.getRelativeY();
+    public int getBlockCellY(Block b) {
+        return (int) Math.ceil(this.y) + b.getRelativeY();
     }
 
 }

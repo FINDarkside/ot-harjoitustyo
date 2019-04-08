@@ -4,7 +4,7 @@ public class Game {
 
     // Speed the block group drops at (blocks per second)
     private static final float VERTICAL_DROP_VELOCITY = 2;
-
+    
     private GameBoard board;
     private boolean paused;
     private BlockGroup blockGroup;
@@ -21,17 +21,18 @@ public class Game {
 
     /**
      * Updates game state.
-     * 
+     *
      * @param dt Time since last update (in milliseconds)
      */
     public void update(float dt) {
         if (paused) {
             return;
         }
-
+        
         blockGroup.setY(blockGroup.getY() - VERTICAL_DROP_VELOCITY * dt);
-        if(board.collidesWithStaticBlocks(blockGroup)){
-            board.placeBlockGroup(blockGroup);
+        if (board.collidesWithStaticBlocks(blockGroup)) {
+            blockGroup.setY((float) Math.floor(blockGroup.getY()) + 1);
+            board.addBlockGroup(blockGroup);
             board.checkForFullRows();
         }
     }

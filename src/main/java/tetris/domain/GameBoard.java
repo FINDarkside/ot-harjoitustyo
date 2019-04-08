@@ -26,8 +26,8 @@ public class GameBoard {
         }
         for (BlockGroup group : blockGroups) {
             for (Block block : group.getBlocks()) {
-                int x = group.getBlockX(block);
-                int y = group.getBlockY(block);
+                int x = group.getBlockCellX(block);
+                int y = group.getBlockCellY(block);
                 usedCells[y][x] = true;
             }
         }
@@ -67,7 +67,7 @@ public class GameBoard {
         for (BlockGroup group : blockGroups) {
             List<Block> blocks = group.getBlocks();
             for (int i = blocks.size() - 1; i >= 0; i--) {
-                if (group.getBlockY(blocks.get(i)) == y) {
+                if (group.getBlockCellY(blocks.get(i)) == y) {
                     blocks.remove(i);
                 }
             }
@@ -101,15 +101,6 @@ public class GameBoard {
     }
 
     /**
-     * Adds block group to the board
-     *
-     * @param group Group to place on the board
-     */
-    public void placeBlockGroup(BlockGroup group) {
-        this.blockGroups.add(group);
-    }
-
-    /**
      * Checks the map for full rows, and removes them when found. If blocks are
      * left floating, they will be moved down until they hit another block.
      *
@@ -122,9 +113,39 @@ public class GameBoard {
                 clearRow(i);
                 fullRows++;
             }
-
         }
+        while (moveFallingBlocks()) {
+        };
         return fullRows;
+    }
+
+    public boolean moveFallingBlocks() {
+        boolean blocksFalling = false;
+        for (BlockGroup group : this.blockGroups) {
+            if (this.moveBlockGroupIfFalling(group)) {
+                blocksFalling = true;
+            }
+        }
+        return blocksFalling;
+    }
+
+    private boolean moveBlockGroupIfFalling(BlockGroup group) {
+        boolean[][] usedCells = this.getUsedCells();
+        for (Block block : group.getBlocks()) {
+            usedCells[group.getBlockCellY(block)][group.getBlockCellX(block)] = false;
+        }
+        for (Block block : group.getBlocks()) {
+            int x = group.getBlockCellX(block);
+            int y = group.getBlockCellY(block);
+            if (y <= 0 || usedCells[y][x]) {
+                if (group.getY() != Math.floor(group.getY())) {
+                    group.setY((float) Math.floor(group.getY()) + 1);
+                }
+                return false;
+            }
+        }
+        group.setY(group.getY() - 1);
+        return true;
     }
 
 }
