@@ -11,7 +11,7 @@
 **Käynnistys**
 
 ```
-mvn compile exec:java "-Dexec.mainClass=tetris.MainApp"
+mvn compile exec:java
 ```
 
 **Testien ajo**

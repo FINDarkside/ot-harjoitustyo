@@ -78,7 +78,12 @@
                             <commandlineArgs>${runfx.args}</commandlineArgs>
                         </configuration>
                     </execution>
-                </executions>  
+                </executions> 
+                <configuration>
+                    <mainClass>tetris.MainApp</mainClass>
+                    <arguments></arguments>
+                    <systemProperties></systemProperties>
+                </configuration> 
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
