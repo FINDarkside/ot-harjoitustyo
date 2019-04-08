@@ -53,4 +53,47 @@ public class GameBoard {
             }
         }
     }
+
+    /**
+     * Checks if the given block group collides with static blocks.
+     *
+     * @param group
+     * @return value indicating whether the given block group collides with
+     * static blocks.
+     */
+    public boolean collidesWithStaticBlocks(BlockGroup group) {
+        for (BlockGroupItem groupItem : group.getBlocks()) {
+            int minX = (int) (group.getX() + groupItem.getRelativeX());
+            int minY = (int) (group.getY() + groupItem.getRelativeY());
+            int maxX = minX + (int) Math.ceil(group.getX() + groupItem.getRelativeX() + 1) - 1;
+            int maxY = minY + (int) Math.ceil(group.getY() + groupItem.getRelativeY() + 1) - 1;
+
+            for (int y = minY; y < maxY; y++) {
+                for (int x = minX; x < maxX; x++) {
+                    if (board[y][x] != null) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Places block group on the board with other static blocks. Ceils y and
+     * floors x coordinate if they are not integers already.
+     *
+     * @param group Group to place on the board
+     */
+    public void placeBlockGroup(BlockGroup group) {
+        for (BlockGroupItem groupItem : group.getBlocks()) {
+            int x = (int) Math.floor(group.getX() + groupItem.getRelativeX());
+            int y = (int) Math.ceil(group.getY() + groupItem.getRelativeY());
+            if (board[y][x] != null) {
+                throw new RuntimeException("Board at " + x + " : " + y + " is already occupied");
+            }
+            board[y][x] = groupItem.getBlock();
+        }
+    }
+
 }
