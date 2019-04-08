@@ -30,5 +30,9 @@ public class Game {
         }
 
         blockGroup.setY(blockGroup.getY() - VERTICAL_DROP_VELOCITY * dt);
+        if(board.collidesWithStaticBlocks(blockGroup)){
+            board.placeBlockGroup(blockGroup);
+            board.checkForFullRows();
+        }
     }
 }

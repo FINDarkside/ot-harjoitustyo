@@ -1,8 +1,10 @@
 package tetris.domain;
 
+import java.util.*;
+
 public class BlockGroup {
 
-    private BlockGroupItem[] blocks;
+    private List<Block> blocks;
     private float x;
     private float y;
 
@@ -13,7 +15,7 @@ public class BlockGroup {
      * @param x x coordinate of the group
      * @param y y coordinate of the group
      */
-    public BlockGroup(BlockGroupItem[] blocks, float x, float y) {
+    public BlockGroup(List<Block> blocks, float x, float y) {
         this.blocks = blocks;
         this.x = x;
         this.y = y;
@@ -23,15 +25,15 @@ public class BlockGroup {
      * Rotates the block group clockwise.
      */
     public void rotateClockwise() {
-        for (BlockGroupItem blockItem : blocks) {
-            int x = blockItem.getRelativeX();
-            int y = blockItem.getRelativeY();
-            blockItem.setRelativeX(y);
-            blockItem.setRelativeY(-x - 1);
+        for (Block block : blocks) {
+            int x = block.getRelativeX();
+            int y = block.getRelativeY();
+            block.setRelativeX(y);
+            block.setRelativeY(-x - 1);
         }
     }
 
-    public BlockGroupItem[] getBlocks() {
+    public List<Block> getBlocks() {
         return blocks;
     }
 
@@ -49,6 +51,14 @@ public class BlockGroup {
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public int getBlockX(Block b) {
+        return (int) Math.floor(this.x) + b.getRelativeX();
+    }
+
+    public int getBlockY(Block b) {
+        return (int) Math.floor(this.y) + b.getRelativeY();
     }
 
 }

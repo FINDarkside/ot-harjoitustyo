@@ -1,10 +1,12 @@
 package tetris.domain;
 
+import java.util.*;
+
 public class GameBoard {
 
     private final int width;
     private final int height;
-    private Block[][] board;
+    private List<BlockGroup> blockGroups = new ArrayList<>();
 
     /**
      * Creates new GameBoard.
@@ -15,23 +17,29 @@ public class GameBoard {
     public GameBoard(int width, int height) {
         this.width = width;
         this.height = height;
-        board = new Block[height][width];
     }
 
-    public Block[][] getBoard() {
-        return board;
+    public boolean[][] getUsedCells() {
+        boolean[][] usedCells = new boolean[height][width];
+        for (int i = 0; i < usedCells.length; i++) {
+            Arrays.fill(usedCells[i], false);
+        }
+        for (BlockGroup group : blockGroups) {
+            for (Block block : group.getBlocks()) {
+                int x = group.getBlockX(block);
+                int y = group.getBlockY(block);
+                usedCells[y][x] = true;
+            }
+        }
+        return usedCells;
     }
 
-    /**
-     * Returns the block at given coordinates, or null if the block does not
-     * exist.
-     *
-     * @param x x coordinate
-     * @param y y coordinate
-     * @return the block at given coordinates, or null if the block does not
-     */
-    public Block getBlock(int x, int y) {
-        return board[y][x];
+    public List<BlockGroup> getBlockGroups() {
+        return blockGroups;
+    }
+
+    public void addBlockGroup(BlockGroup group) {
+        this.blockGroups.add(group);
     }
 
     /**
@@ -41,11 +49,8 @@ public class GameBoard {
      * @return true if target row is full
      */
     public boolean isRowFull(int y) {
-        if (y < 0 || y >= height) {
-            return false;
-        }
-        for (Block b : board[y]) {
-            if (b == null) {
+        for (boolean cellUsed : getUsedCells()[y]) {
+            if (!cellUsed) {
                 return false;
             }
         }
@@ -59,13 +64,12 @@ public class GameBoard {
      * @param y Row to clear, 0 is the bottom row
      */
     public void clearRow(int y) {
-        for (int x = 0; x < width; x++) {
-            board[y][x] = null;
-        }
-        for (int i = y + 1; i < height; i++) {
-            for (int x = 0; x < width; x++) {
-                board[i - 1][x] = board[i][x];
-                board[i][x] = null;
+        for (BlockGroup group : blockGroups) {
+            List<Block> blocks = group.getBlocks();
+            for (int i = blocks.size() - 1; i >= 0; i--) {
+                if (group.getBlockY(blocks.get(i)) == y) {
+                    blocks.remove(i);
+                }
             }
         }
     }
@@ -78,15 +82,16 @@ public class GameBoard {
      * static blocks.
      */
     public boolean collidesWithStaticBlocks(BlockGroup group) {
-        for (BlockGroupItem groupItem : group.getBlocks()) {
-            int minX = (int) (group.getX() + groupItem.getRelativeX());
-            int minY = (int) (group.getY() + groupItem.getRelativeY());
-            int maxX = minX + (int) Math.ceil(group.getX() + groupItem.getRelativeX() + 1) - 1;
-            int maxY = minY + (int) Math.ceil(group.getY() + groupItem.getRelativeY() + 1) - 1;
+        boolean[][] usedCells = getUsedCells();
+        for (Block block : group.getBlocks()) {
+            int minX = (int) (group.getX() + block.getRelativeX());
+            int minY = (int) (group.getY() + block.getRelativeY());
+            int maxX = minX + (int) Math.ceil(group.getX() + block.getRelativeX() + 1) - 1;
+            int maxY = minY + (int) Math.ceil(group.getY() + block.getRelativeY() + 1) - 1;
 
             for (int y = minY; y < maxY; y++) {
                 for (int x = minX; x < maxX; x++) {
-                    if (board[y][x] != null) {
+                    if (usedCells[y][x]) {
                         return true;
                     }
                 }
@@ -96,20 +101,30 @@ public class GameBoard {
     }
 
     /**
-     * Places block group on the board with other static blocks. Ceils y and
-     * floors x coordinate if they are not integers already.
+     * Adds block group to the board
      *
      * @param group Group to place on the board
      */
     public void placeBlockGroup(BlockGroup group) {
-        for (BlockGroupItem groupItem : group.getBlocks()) {
-            int x = (int) Math.floor(group.getX() + groupItem.getRelativeX());
-            int y = (int) Math.ceil(group.getY() + groupItem.getRelativeY());
-            if (board[y][x] != null) {
-                throw new RuntimeException("Board at " + x + " : " + y + " is already occupied");
+        this.blockGroups.add(group);
+    }
+
+    /**
+     * Checks the map for full rows, and removes them when found. If blocks are
+     * left floating, they will be moved down until they hit another block.
+     *
+     * @return Amount of rows removed
+     */
+    public int checkForFullRows() {
+        int fullRows = 0;
+        for (int i = 0; i < height; i++) {
+            if (isRowFull(i)) {
+                clearRow(i);
+                fullRows++;
             }
-            board[y][x] = groupItem.getBlock();
+
         }
+        return fullRows;
     }
 
 }

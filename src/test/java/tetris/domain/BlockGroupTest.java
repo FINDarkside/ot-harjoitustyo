@@ -1,6 +1,6 @@
 package tetris.domain;
 
-import java.util.Arrays;
+import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -14,14 +14,14 @@ public class BlockGroupTest {
             new int[]{-1, 0},
             new int[]{0, 0}
         };
-        BlockGroupItem[] groupBlocks = new BlockGroupItem[]{
-            new BlockGroupItem(new Block("#000"), 0, 0)
-        };
-        BlockGroup group = new BlockGroup(groupBlocks, 0, 0);
+        ArrayList<Block> blocks = new ArrayList();
+        blocks.add(new Block("#00", 0, 0));
+
+        BlockGroup group = new BlockGroup(blocks, 0, 0);
         for (int i = 0; i < expectedResult.length; i++) {
             group.rotateClockwise();
-            assertEquals(expectedResult[i][0], group.getBlocks()[0].getRelativeX());
-            assertEquals(expectedResult[i][1], group.getBlocks()[0].getRelativeY());
+            assertEquals(expectedResult[i][0], group.getBlocks().get(0).getRelativeX());
+            assertEquals(expectedResult[i][1], group.getBlocks().get(0).getRelativeY());
         }
     }
 
@@ -33,18 +33,20 @@ public class BlockGroupTest {
             new int[]{-1, 3, -2, 2, -3, 3, -4, 2},
             new int[]{3, 0, 2, 1, 3, 2, 2, 3}
         };
-        BlockGroupItem[] groupBlocks = new BlockGroupItem[]{
-            new BlockGroupItem(new Block("#000"), 3, 0),
-            new BlockGroupItem(new Block("#000"), 2, 1),
-            new BlockGroupItem(new Block("#000"), 3, 2),
-            new BlockGroupItem(new Block("#000"), 2, 3)
-        };
-        BlockGroup group = new BlockGroup(groupBlocks, 0, 0);
-        for (int i = 0; i < expectedResult.length; i++) {
+        ArrayList<Block> blocks = new ArrayList<>();
+        blocks.add(new Block("#000", 3, 0));
+        blocks.add(new Block("#000", 2, 1));
+        blocks.add(new Block("#000", 3, 2));
+        blocks.add(new Block("#000", 2, 3));
+
+        BlockGroup group = new BlockGroup(blocks, 0, 0);
+        for (int i = 0;
+                i < expectedResult.length;
+                i++) {
             group.rotateClockwise();
             for (int j = 0; j < expectedResult[i].length; j += 2) {
-                assertEquals(expectedResult[i][j], group.getBlocks()[j / 2].getRelativeX());
-                assertEquals(expectedResult[i][j + 1], group.getBlocks()[j / 2].getRelativeY());
+                assertEquals(expectedResult[i][j], group.getBlocks().get(j / 2).getRelativeX());
+                assertEquals(expectedResult[i][j + 1], group.getBlocks().get(j / 2).getRelativeY());
             }
         }
     }
