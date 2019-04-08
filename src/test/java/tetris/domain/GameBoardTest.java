@@ -47,37 +47,28 @@ public class GameBoardTest {
     }
 
     @Test
-    public void clearRowMovesAboveRowsDown() {
-        gameBoard.clearRow(0);
-        gameBoard.moveFallingBlocks();
-        boolean usedFound = false;
-        for (boolean b : gameBoard.getUsedCells()[0]) {
-            if (b) {
-                usedFound = true;
-            }
-        }
-        assertEquals("At lest 1 cell should be used", true, usedFound);
-    }
-
-    @Test
     public void boardCanBeClearedWithClearRow() {
         for (int i = 0; i < n; i++) {
-            gameBoard.clearRow(0);
-            gameBoard.moveFallingBlocks();
+            gameBoard.clearRow(i);
         }
         for (boolean[] ba : gameBoard.getUsedCells()) {
             for (boolean b : ba) {
-                assertEquals("All cells should be unused after calling", false, b);
+                assertEquals("All cells should be unused after calling clearRow on all rows", false, b);
             }
         }
     }
 
     @Test
-    public void moveFallingBlocksMovesBlocksDown() {
-        while (gameBoard.moveFallingBlocks()) {
-        };
-        for (boolean b : gameBoard.getUsedCells()[0]) {
-            assertEquals("All cells in bottom row should be usedF", true, b);
+    public void clearFullRowsClearsOnlyFullRows() {
+        gameBoard.clearFullRows();
+        for (int i = 0; i < n; i++) {
+            boolean usedCellsFound = false;
+            for (boolean b : gameBoard.getUsedCells()[i]) {
+                if (b) {
+                    usedCellsFound = true;
+                }
+            }
+            assertEquals(i != 0, usedCellsFound);
         }
     }
 

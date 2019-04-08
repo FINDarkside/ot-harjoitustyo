@@ -106,7 +106,7 @@ public class GameBoard {
      *
      * @return Amount of rows removed
      */
-    public int checkForFullRows() {
+    public int clearFullRows() {
         int fullRows = 0;
         for (int i = 0; i < height; i++) {
             if (isRowFull(i)) {
@@ -114,38 +114,7 @@ public class GameBoard {
                 fullRows++;
             }
         }
-        while (moveFallingBlocks()) {
-        };
         return fullRows;
-    }
-
-    public boolean moveFallingBlocks() {
-        boolean blocksFalling = false;
-        for (BlockGroup group : this.blockGroups) {
-            if (this.moveBlockGroupIfFalling(group)) {
-                blocksFalling = true;
-            }
-        }
-        return blocksFalling;
-    }
-
-    private boolean moveBlockGroupIfFalling(BlockGroup group) {
-        boolean[][] usedCells = this.getUsedCells();
-        for (Block block : group.getBlocks()) {
-            usedCells[group.getBlockCellY(block)][group.getBlockCellX(block)] = false;
-        }
-        for (Block block : group.getBlocks()) {
-            int x = group.getBlockCellX(block);
-            int y = group.getBlockCellY(block);
-            if (y <= 0 || usedCells[y][x]) {
-                if (group.getY() != Math.floor(group.getY())) {
-                    group.setY((float) Math.floor(group.getY()) + 1);
-                }
-                return false;
-            }
-        }
-        group.setY(group.getY() - 1);
-        return true;
     }
 
 }
