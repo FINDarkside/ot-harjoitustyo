@@ -25,3 +25,9 @@ mvn test
 ```
 mvn test jacoco:report
 ```
+
+## Checkstyle
+
+```
+mvn jxr:jxr checkstyle:checkstyle
+```
