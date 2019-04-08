@@ -19,15 +19,8 @@ public class BlockGroup {
         for (BlockGroupItem blockItem : blocks) {
             int x = blockItem.getRelativeX();
             int y = blockItem.getRelativeY();
-            if (x < 0 != y < 0) {
-                x *= -1;
-                x += x < 0 ? 1 : -1;
-                blockItem.setRelativeX(x);
-            } else {
-                y *= -1;
-                y += y < 0 ? 1 : -1;
-                blockItem.setRelativeY(y);
-            }
+            blockItem.setRelativeX(y);
+            blockItem.setRelativeY(-x - 1);
         }
     }
 
