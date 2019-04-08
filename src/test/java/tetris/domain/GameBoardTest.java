@@ -72,4 +72,22 @@ public class GameBoardTest {
         }
     }
 
+    @Test
+    public void collidesWithStaticBlockTest1() {
+        List<Block> l = new ArrayList<>();
+        l.add(new Block("#000", 0, 0));
+        BlockGroup group = new BlockGroup(l, 0, n - 1);
+        assertEquals(false, gameBoard.collidesWithStaticBlocks(group));
+    }
+
+    @Test
+    public void collidesWithStaticBlockTest2() {
+        List<Block> l = new ArrayList<>();
+        l.add(new Block("#000", 0, 0));
+        l.add(new Block("#000", 1, 0));
+        l.add(new Block("#000", 2, 0));
+        BlockGroup group = new BlockGroup(l, 5, n - 1);
+        assertEquals(true, gameBoard.collidesWithStaticBlocks(group));
+    }
+
 }
