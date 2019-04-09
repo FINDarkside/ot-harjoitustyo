@@ -92,6 +92,8 @@ public class GameBoard {
      * static blocks.
      */
     public boolean collidesWithStaticBlocks(BlockGroup group) {
+        if(group.getY() < 0)
+            return true;
         boolean[][] usedCells = getUsedCells();
         for (Block block : group.getBlocks()) {
             int minX = (int) (group.getX() + block.getRelativeX());
@@ -101,8 +103,10 @@ public class GameBoard {
 
             for (int y = minY; y < maxY; y++) {
                 for (int x = minX; x < maxX; x++) {
-                    if (usedCells[y][x]) {
-                        return true;
+                    if(y >= 0 && y < height && x >= 0 && x < width){
+                        if (usedCells[y][x]) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -125,6 +129,14 @@ public class GameBoard {
             }
         }
         return fullRows;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
 }

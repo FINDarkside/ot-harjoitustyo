@@ -1,13 +1,15 @@
 package tetris.domain;
 
+import java.util.ArrayList;
+
 public class Game {
 
     // Speed the block group drops at (blocks per second)
-    private static final float VERTICAL_DROP_VELOCITY = 2;
+    private static final float VERTICAL_DROP_VELOCITY = 1;
 
     private GameBoard board;
     private boolean paused;
-    private BlockGroup blockGroup;
+    private BlockGroup activeBlockGroup;
 
     /**
      * Creates new game with given width and height.
@@ -17,6 +19,17 @@ public class Game {
      */
     public Game(int height, int width) {
         this.board = new GameBoard(width, height);
+        createActiveBlockGroup();
+    }
+    
+    public void createActiveBlockGroup(){
+        ArrayList<Block> blocks = new ArrayList();
+        blocks.add(new Block("#000", 0, 0));
+        blocks.add(new Block("#000", 0, 1));
+        blocks.add(new Block("#000", 1, 1));
+        blocks.add(new Block("#000", 2, 1));
+        BlockGroup group = new BlockGroup(blocks, board.getWidth() / 2, board.getHeight());
+        activeBlockGroup = group;
     }
 
     /**
@@ -29,11 +42,13 @@ public class Game {
             return;
         }
 
-        blockGroup.setY(blockGroup.getY() - VERTICAL_DROP_VELOCITY * dt);
-        if (board.collidesWithStaticBlocks(blockGroup)) {
-            blockGroup.setY((float) Math.floor(blockGroup.getY()) + 1);
-            board.addBlockGroup(blockGroup);
+        activeBlockGroup.setY(activeBlockGroup.getY() - VERTICAL_DROP_VELOCITY * dt);
+        if (board.collidesWithStaticBlocks(activeBlockGroup)) {
+            System.out.println("COLLIDES");
+            activeBlockGroup.setY((float) Math.floor(activeBlockGroup.getY()) + 1);
+            board.addBlockGroup(activeBlockGroup);
             board.clearFullRows();
+            createActiveBlockGroup();
         }
     }
 
@@ -81,4 +96,13 @@ public class Game {
         group.setY(group.getY() - 1);
         return true;
     }
+
+    public GameBoard getBoard() {
+        return board;
+    }
+
+    public BlockGroup getActiveBlockGroup() {
+        return activeBlockGroup;
+    }
+
 }
