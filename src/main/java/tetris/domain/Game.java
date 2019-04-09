@@ -21,8 +21,11 @@ public class Game {
         this.board = new GameBoard(width, height);
         createActiveBlockGroup();
     }
-    
-    public void createActiveBlockGroup(){
+
+    /**
+     * Creates and sets new active block group.
+     */
+    public void createActiveBlockGroup() {
         ArrayList<Block> blocks = new ArrayList();
         blocks.add(new Block("#000", 0, 0));
         blocks.add(new Block("#000", 0, 1));

@@ -48,7 +48,7 @@ public class MainApp extends Application {
         AnimationTimer animator = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                float dt = (float)(now - lastTime) / 1000000000;
+                float dt = (float) (now - lastTime) / 1000000000;
                 dt = 0.00001f;
                 game.update(0.1f);
                 controller.render();
