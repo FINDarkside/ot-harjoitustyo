@@ -26,7 +26,7 @@ public class Game {
      * Creates and sets new active block group.
      */
     public void createActiveBlockGroup() {
-        ArrayList<Block> blocks = new ArrayList();
+        ArrayList<Block> blocks = new ArrayList<>();
         blocks.add(new Block("#000", 0, 0));
         blocks.add(new Block("#000", 0, 1));
         blocks.add(new Block("#000", 1, 1));
