@@ -53,10 +53,26 @@ public class BlockGroup {
         this.y = y;
     }
 
+    /**
+     * Returns the smallest x coordinate of a cell the given block occupies. For
+     * example, if the absolute x position of the block is 2.5, this will return
+     * 2.
+     *
+     * @param b target block to calculate coordinate from
+     * @return smallest x coordinate of a cell the given block occupies
+     */
     public int getBlockCellX(Block b) {
         return (int) Math.floor(this.x) + b.getRelativeX();
     }
 
+    /**
+     * Returns the largest y coordinate of a cell the given block occupies. For
+     * example, if the absolute y position of the block is 2.5, this will return
+     * 3.
+     *
+     * @param b target block to calculate coordinate from
+     * @return smallest x coordinate of a cell the given block occupies
+     */
     public int getBlockCellY(Block b) {
         return (int) Math.ceil(this.y) + b.getRelativeY();
     }

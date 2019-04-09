@@ -19,6 +19,11 @@ public class GameBoard {
         this.height = height;
     }
 
+    /**
+     * Calculates the occupied cells on the game board. Bottom left is [0][0]
+     *
+     * @return 2d boolean array indicating which cells are occupied
+     */
     public boolean[][] getUsedCells() {
         boolean[][] usedCells = new boolean[height][width];
         for (int i = 0; i < usedCells.length; i++) {
@@ -38,6 +43,11 @@ public class GameBoard {
         return blockGroups;
     }
 
+    /**
+     * Adds block group to the board.
+     *
+     * @param group group to add
+     */
     public void addBlockGroup(BlockGroup group) {
         this.blockGroups.add(group);
     }

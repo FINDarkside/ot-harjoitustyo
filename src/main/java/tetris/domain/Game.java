@@ -37,7 +37,15 @@ public class Game {
         }
     }
 
-    public boolean moveFallingBlocks() {
+    /**
+     * Moves all block groups that are falling. Block group is considered
+     * falling, if none of its blocks have another block directly below that's
+     * not falling and is not from the same group.
+     *
+     * @return true if there was at least one falling block group, otherwise
+     * false
+     */
+    public boolean moveFallingBlockGroups() {
         boolean blocksFalling = false;
         for (BlockGroup group : board.getBlockGroups()) {
             if (this.moveBlockGroupIfFalling(group)) {
@@ -47,6 +55,14 @@ public class Game {
         return blocksFalling;
     }
 
+    /**
+     * Moves the given block group down if it's falling. Block group is
+     * considered falling, if none of its blocks have another block directly
+     * below that's not falling and is not from the same group.
+     *
+     * @param group Group to move down if it's falling
+     * @return true if the block group was falling, otherwise false
+     */
     private boolean moveBlockGroupIfFalling(BlockGroup group) {
         boolean[][] usedCells = board.getUsedCells();
         for (Block block : group.getBlocks()) {
