@@ -9,4 +9,5 @@
 |  | 1    | Pelilogiikan kehittäminen, checkstyle javadoceille käyttöön ja javadocien lisääminen  |
 |  | 2    | Refaktorointia ja testien lisäystä  |
 | 9.4 | 2    | Luokkakaavio  |
-| Yhteensä   | 12   | | 
+|  | 2    | Osa pelin renderöinnistä  |
+| Yhteensä   | 14   | | 
