@@ -8,4 +8,5 @@
 | 8.4 | 3    | Checkstyle käyttöön, blockgroup ja blockgrouping rotate + testaus  |
 |  | 1    | Pelilogiikan kehittäminen, checkstyle javadoceille käyttöön ja javadocien lisääminen  |
 |  | 2    | Refaktorointia ja testien lisäystä  |
-| Yhteensä   | 10   | | 
+| 9.4 | 2    | Luokkakaavio  |
+| Yhteensä   | 12   | | 

@@ -6,6 +6,8 @@
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
 
+[Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+
 ## Komentorivitoiminnot
 
 **Käynnistys**
