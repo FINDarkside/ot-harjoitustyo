@@ -20,7 +20,7 @@ public class GameBoardTest {
                 if (j >= i) {
                     List<Block> l = new ArrayList<>();
                     l.add(new Block("#000", 0, 0));
-                    gameBoard.addBlockGroup(new BlockGroup(l, j, i));
+                    gameBoard.addBlockGroup(new Tetromino(l, j, i));
                 }
             }
         }
@@ -76,7 +76,7 @@ public class GameBoardTest {
     public void collidesWithStaticBlockTest1() {
         List<Block> l = new ArrayList<>();
         l.add(new Block("#000", 0, 0));
-        BlockGroup group = new BlockGroup(l, 0, n - 1);
+        Tetromino group = new Tetromino(l, 0, n - 1);
         assertEquals(false, gameBoard.collidesWithStaticBlocks(group));
     }
 
@@ -86,7 +86,7 @@ public class GameBoardTest {
         l.add(new Block("#000", 0, 0));
         l.add(new Block("#000", 1, 0));
         l.add(new Block("#000", 2, 0));
-        BlockGroup group = new BlockGroup(l, 5, n - 1);
+        Tetromino group = new Tetromino(l, 5, n - 1);
         assertEquals(true, gameBoard.collidesWithStaticBlocks(group));
     }
 

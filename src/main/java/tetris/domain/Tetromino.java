@@ -2,7 +2,7 @@ package tetris.domain;
 
 import java.util.*;
 
-public class BlockGroup {
+public class Tetromino {
 
     private List<Block> blocks;
     private float x;
@@ -15,7 +15,7 @@ public class BlockGroup {
      * @param x x coordinate of the group
      * @param y y coordinate of the group
      */
-    public BlockGroup(List<Block> blocks, float x, float y) {
+    public Tetromino(List<Block> blocks, float x, float y) {
         this.blocks = blocks;
         this.x = x;
         this.y = y;

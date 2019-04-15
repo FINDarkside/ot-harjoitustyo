@@ -34,7 +34,7 @@ public class GameViewController implements Initializable {
         float width = (float) canvas.getWidth();
         gc.clearRect(0, 0, width, height);
 
-        for (BlockGroup group : game.getBoard().getBlockGroups()) {
+        for (Tetromino group : game.getBoard().getBlockGroups()) {
             drawBlockGroup(group);
         }
         drawBlockGroup(game.getActiveBlockGroup());
@@ -45,7 +45,7 @@ public class GameViewController implements Initializable {
         gc.fillRect(width - 1, 0, width, height);
     }
 
-    private void drawBlockGroup(BlockGroup group) {
+    private void drawBlockGroup(Tetromino group) {
         float height = (float) canvas.getHeight();
         float width = (float) canvas.getWidth();
         for (Block block : group.getBlocks()) {

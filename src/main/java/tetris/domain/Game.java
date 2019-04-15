@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class Game {
 
     // Speed the block group drops at (blocks per second)
-    private static final float VERTICAL_DROP_VELOCITY = 1;
+    private static final float VERTICAL_DROP_VELOCITY = 4;
 
     private GameBoard board;
     private boolean paused;
-    private BlockGroup activeBlockGroup;
+    private Tetromino activeTetromino;
+    private TetrominoPool tetrominoPool = new TetrominoPool();
 
     /**
      * Creates new game with given width and height.
@@ -19,20 +20,16 @@ public class Game {
      */
     public Game(int height, int width) {
         this.board = new GameBoard(width, height);
-        createActiveBlockGroup();
+        setNextTetromino();
     }
 
     /**
      * Creates and sets new active block group.
      */
-    public void createActiveBlockGroup() {
-        ArrayList<Block> blocks = new ArrayList<>();
-        blocks.add(new Block("#000", 0, 0));
-        blocks.add(new Block("#000", 0, 1));
-        blocks.add(new Block("#000", 1, 1));
-        blocks.add(new Block("#000", 2, 1));
-        BlockGroup group = new BlockGroup(blocks, board.getWidth() / 2, board.getHeight());
-        activeBlockGroup = group;
+    public void setNextTetromino() {
+        activeTetromino = tetrominoPool.getNext();
+        activeTetromino.setX((float) Math.floor(board.getWidth() / 2));
+        activeTetromino.setY(board.getHeight());
     }
 
     /**
@@ -44,14 +41,13 @@ public class Game {
         if (paused) {
             return;
         }
-
-        activeBlockGroup.setY(activeBlockGroup.getY() - VERTICAL_DROP_VELOCITY * dt);
-        if (board.collidesWithStaticBlocks(activeBlockGroup)) {
+        activeTetromino.setY(activeTetromino.getY() - VERTICAL_DROP_VELOCITY * dt);
+        if (board.collidesWithStaticBlocks(activeTetromino)) {
             System.out.println("COLLIDES");
-            activeBlockGroup.setY((float) Math.floor(activeBlockGroup.getY()) + 1);
-            board.addBlockGroup(activeBlockGroup);
+            activeTetromino.setY((float) Math.floor(activeTetromino.getY()) + 1);
+            board.addBlockGroup(activeTetromino);
             board.clearFullRows();
-            createActiveBlockGroup();
+            setNextTetromino();
         }
     }
 
@@ -65,7 +61,7 @@ public class Game {
      */
     public boolean moveFallingBlockGroups() {
         boolean blocksFalling = false;
-        for (BlockGroup group : board.getBlockGroups()) {
+        for (Tetromino group : board.getBlockGroups()) {
             if (this.moveBlockGroupIfFalling(group)) {
                 blocksFalling = true;
             }
@@ -81,7 +77,7 @@ public class Game {
      * @param group Group to move down if it's falling
      * @return true if the block group was falling, otherwise false
      */
-    private boolean moveBlockGroupIfFalling(BlockGroup group) {
+    private boolean moveBlockGroupIfFalling(Tetromino group) {
         boolean[][] usedCells = board.getUsedCells();
         for (Block block : group.getBlocks()) {
             usedCells[group.getBlockCellY(block)][group.getBlockCellX(block)] = false;
@@ -104,8 +100,8 @@ public class Game {
         return board;
     }
 
-    public BlockGroup getActiveBlockGroup() {
-        return activeBlockGroup;
+    public Tetromino getActiveBlockGroup() {
+        return activeTetromino;
     }
 
 }

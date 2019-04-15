@@ -44,13 +44,15 @@ public class MainApp extends Application {
         Game game = new Game(30, 15);
         controller.setGame(game);
 
-        long lastTime = System.nanoTime();
         AnimationTimer animator = new AnimationTimer() {
+            private long lastTime;
+
             @Override
             public void handle(long now) {
                 float dt = (float) (now - lastTime) / 1000000000;
-                dt = 0.00001f;
-                game.update(0.1f);
+                dt = Math.min(1f / 30, dt);
+                lastTime = now;
+                game.update(dt);
                 controller.render();
             }
         };

@@ -6,7 +6,7 @@ public class GameBoard {
 
     private final int width;
     private final int height;
-    private List<BlockGroup> blockGroups = new ArrayList<>();
+    private List<Tetromino> blockGroups = new ArrayList<>();
 
     /**
      * Creates new GameBoard.
@@ -29,17 +29,19 @@ public class GameBoard {
         for (int i = 0; i < usedCells.length; i++) {
             Arrays.fill(usedCells[i], false);
         }
-        for (BlockGroup group : blockGroups) {
+        for (Tetromino group : blockGroups) {
             for (Block block : group.getBlocks()) {
                 int x = group.getBlockCellX(block);
                 int y = group.getBlockCellY(block);
-                usedCells[y][x] = true;
+                if (y < height) {
+                    usedCells[y][x] = true;
+                }
             }
         }
         return usedCells;
     }
 
-    public List<BlockGroup> getBlockGroups() {
+    public List<Tetromino> getBlockGroups() {
         return blockGroups;
     }
 
@@ -48,7 +50,7 @@ public class GameBoard {
      *
      * @param group group to add
      */
-    public void addBlockGroup(BlockGroup group) {
+    public void addBlockGroup(Tetromino group) {
         this.blockGroups.add(group);
     }
 
@@ -74,7 +76,7 @@ public class GameBoard {
      * @param y Row to clear, 0 is the bottom row
      */
     public void clearRow(int y) {
-        for (BlockGroup group : blockGroups) {
+        for (Tetromino group : blockGroups) {
             List<Block> blocks = group.getBlocks();
             for (int i = blocks.size() - 1; i >= 0; i--) {
                 if (group.getBlockCellY(blocks.get(i)) == y) {
@@ -91,7 +93,7 @@ public class GameBoard {
      * @return value indicating whether the given block group collides with
      * static blocks.
      */
-    public boolean collidesWithStaticBlocks(BlockGroup group) {
+    public boolean collidesWithStaticBlocks(Tetromino group) {
         if (group.getY() < 0) {
             return true;
         }

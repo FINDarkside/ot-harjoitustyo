@@ -17,7 +17,7 @@ public class BlockGroupTest {
         ArrayList<Block> blocks = new ArrayList();
         blocks.add(new Block("#00", 0, 0));
 
-        BlockGroup group = new BlockGroup(blocks, 0, 0);
+        Tetromino group = new Tetromino(blocks, 0, 0);
         for (int i = 0; i < expectedResult.length; i++) {
             group.rotateClockwise();
             assertEquals(expectedResult[i][0], group.getBlocks().get(0).getRelativeX());
@@ -39,7 +39,7 @@ public class BlockGroupTest {
         blocks.add(new Block("#000", 3, 2));
         blocks.add(new Block("#000", 2, 3));
 
-        BlockGroup group = new BlockGroup(blocks, 0, 0);
+        Tetromino group = new Tetromino(blocks, 0, 0);
         for (int i = 0;
                 i < expectedResult.length;
                 i++) {
