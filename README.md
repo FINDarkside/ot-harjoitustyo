@@ -33,3 +33,8 @@ mvn test jacoco:report
 ```
 mvn jxr:jxr checkstyle:checkstyle
 ```
+
+**Jar tiedoston generointi**
+```
+mvn package
+```
