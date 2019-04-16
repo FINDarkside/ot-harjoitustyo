@@ -10,4 +10,5 @@
 |  | 2    | Refaktorointia ja testien lisäystä  |
 | 9.4 | 2    | Luokkakaavio  |
 |  | 2    | Osa pelin renderöinnistä  |
+| 15.4 | 2    | Refaktorointi, tetrominojen satunnainen järjestys  |
 | Yhteensä   | 14   | | 
