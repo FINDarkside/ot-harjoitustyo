@@ -1,10 +1,11 @@
 package tetris.domain;
 
-import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class TetrominoPool {
 
-    private ArrayDeque<Tetromino> pool = new ArrayDeque<>();
+    private ArrayList<Tetromino> pool = new ArrayList<>();
     TetrominoFactory factory = new TetrominoFactory();
 
     public TetrominoPool() {
@@ -12,10 +13,10 @@ public class TetrominoPool {
     }
 
     public Tetromino getNext() {
-        if (pool.size() == 0) {
+        if (pool.isEmpty()) {
             this.generate();
         }
-        return pool.pop();
+        return pool.remove(pool.size() - 1);
     }
 
     private void generate() {
@@ -23,5 +24,6 @@ public class TetrominoPool {
         for (TetrominoType type : TetrominoType.values()) {
             this.pool.add(factory.create(type, "#333"));
         }
+        Collections.shuffle(pool);
     }
 }
