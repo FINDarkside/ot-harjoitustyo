@@ -11,4 +11,6 @@
 | 9.4 | 2    | Luokkakaavio  |
 |  | 2    | Osa pelin renderöinnistä  |
 | 15.4 | 2    | Refaktorointi, tetrominojen satunnainen järjestys  |
-| Yhteensä   | 14   | | 
+| 16.4 | 2    | Peli pelattavaan tilaan. Kontrollit yms.  |
+|  | 2    | Testien lisäys, sekvenssikaavio, release  |
+| Yhteensä   | 20   | | 
