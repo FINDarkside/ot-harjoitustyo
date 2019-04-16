@@ -1,4 +1,6 @@
-# Ohjelmistotekniikka 2019 - harjoitustyö
+# Ohjelmistotekniikka 2019 - Tetris
+
+Tetris klooni.
 
 ## Dokumentaatio
 
