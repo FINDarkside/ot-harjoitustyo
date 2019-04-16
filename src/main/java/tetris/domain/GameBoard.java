@@ -33,7 +33,7 @@ public class GameBoard {
             for (Block block : group.getBlocks()) {
                 int x = group.getBlockCellX(block);
                 int y = group.getBlockCellY(block);
-                if (y < height) {
+                if (y < height && y >= 0) {
                     usedCells[y][x] = true;
                 }
             }
@@ -94,18 +94,17 @@ public class GameBoard {
      * static blocks.
      */
     public boolean collidesWithStaticBlocks(Tetromino group) {
-        if (group.getY() < 0) {
-            return true;
-        }
         boolean[][] usedCells = getUsedCells();
         for (Block block : group.getBlocks()) {
-            int minX = (int) (group.getX() + block.getRelativeX());
-            int minY = (int) (group.getY() + block.getRelativeY());
-            int maxX = minX + (int) Math.ceil(group.getX() + block.getRelativeX() + 1) - 1;
-            int maxY = minY + (int) Math.ceil(group.getY() + block.getRelativeY() + 1) - 1;
-
-            for (int y = minY; y < maxY; y++) {
-                for (int x = minX; x < maxX; x++) {
+            int minX = (int) Math.floor(group.getX() + block.getRelativeX());
+            int minY = (int) Math.floor(group.getY() + block.getRelativeY());
+            int maxX = minX + (int) Math.ceil(group.getX() + block.getRelativeX());
+            int maxY = minY + (int) Math.ceil(group.getY() + block.getRelativeY());
+            for (int y = minY; y <= maxY; y++) {
+                for (int x = minX; x <= maxX; x++) {
+                    if (y < 0) {
+                        return true;
+                    }
                     if (y >= 0 && y < height && x >= 0 && x < width) {
                         if (y >= 0 && y < height && x >= 0 && x < width && usedCells[y][x]) {
                             return true;
