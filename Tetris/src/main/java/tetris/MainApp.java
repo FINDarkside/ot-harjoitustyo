@@ -40,23 +40,6 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/GameView.fxml"));
         scene.setRoot((Pane) loader.load());
         GameViewController controller = (GameViewController) loader.getController();
-
-        Game game = new Game(30, 15);
-        controller.setGame(game);
-
-        AnimationTimer animator = new AnimationTimer() {
-            private long lastTime;
-
-            @Override
-            public void handle(long now) {
-                float dt = (float) (now - lastTime) / 1000000000;
-                dt = Math.min(1f / 30, dt);
-                lastTime = now;
-                game.update(dt);
-                controller.render();
-            }
-        };
-        animator.start();
-
+        controller.setupListeners();
     }
 }

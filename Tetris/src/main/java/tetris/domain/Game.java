@@ -12,6 +12,8 @@ public class Game {
     private Tetromino activeTetromino;
     private TetrominoPool tetrominoPool = new TetrominoPool();
 
+    private boolean inputLeft, inputRight, inputRotate, inputDown;
+
     /**
      * Creates new game with given width and height.
      *
@@ -42,12 +44,33 @@ public class Game {
             return;
         }
         activeTetromino.setY(activeTetromino.getY() - VERTICAL_DROP_VELOCITY * dt);
-        if (board.collidesWithStaticBlocks(activeTetromino)) {
-            System.out.println("COLLIDES");
+        handleInput();
+        if (board.collidesWithStaticBlocks(activeTetromino) || activeTetromino.getMinY() < 0) {
             activeTetromino.setY((float) Math.floor(activeTetromino.getY()) + 1);
             board.addBlockGroup(activeTetromino);
             board.clearFullRows();
             setNextTetromino();
+        }
+    }
+
+    private void handleInput() {
+        if (inputLeft) {
+            activeTetromino.setX(activeTetromino.getX() - 1);
+            inputLeft = false;
+        }
+        if (inputRight) {
+            activeTetromino.setX(activeTetromino.getX() + 1);
+            inputRight = false;
+        }
+        if (inputRotate) {
+            activeTetromino.rotateClockwise();
+            inputRotate = false;
+        }
+        if (inputDown) {
+            while (!board.collidesWithStaticBlocks(activeTetromino) && activeTetromino.getMinY() > 0) {
+                activeTetromino.setY(activeTetromino.getY() - 1);
+            }
+            inputDown = false;
         }
     }
 
@@ -102,6 +125,22 @@ public class Game {
 
     public Tetromino getActiveBlockGroup() {
         return activeTetromino;
+    }
+
+    public void inputLeft() {
+        inputLeft = true;
+    }
+
+    public void inputRight() {
+        inputRight = true;
+    }
+
+    public void inputRotate() {
+        inputRotate = true;
+    }
+
+    public void inputDown() {
+        inputDown = true;
     }
 
 }

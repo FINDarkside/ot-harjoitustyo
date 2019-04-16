@@ -86,7 +86,7 @@ public class GameBoardTest {
         l.add(new Block("#000", 0, 0));
         l.add(new Block("#000", 1, 0));
         l.add(new Block("#000", 2, 0));
-        Tetromino group = new Tetromino(l, 5, n - 1);
+        Tetromino group = new Tetromino(l, 7, n - 1);
         assertEquals(true, gameBoard.collidesWithStaticBlocks(group));
     }
 

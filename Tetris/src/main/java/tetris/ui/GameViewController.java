@@ -2,10 +2,14 @@ package tetris.ui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import tetris.domain.*;
 
@@ -15,12 +19,53 @@ public class GameViewController implements Initializable {
     private Canvas canvas;
     private GraphicsContext gc;
 
-    private float pixelsPerCell = 15;
+    private float pixelsPerCell = 25;
     private Game game;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gc = canvas.getGraphicsContext2D();
+        this.game = new Game(20, 10);
+        canvas.setWidth(10 * pixelsPerCell);
+        canvas.setHeight(20 * pixelsPerCell);
+        startGameLoop();
+    }
+
+    public void setupListeners() {
+        Scene scene = canvas.getScene();
+        scene.setOnKeyPressed((KeyEvent event) -> {
+            switch (event.getCode()) {
+                case UP:
+                    game.inputRotate();
+                    break;
+                case DOWN:
+                    game.inputDown();
+                    break;
+                case LEFT:
+                    game.inputLeft();
+                    break;
+                case RIGHT:
+                    game.inputRight();
+                    break;
+            }
+        });
+    }
+
+    private void startGameLoop() {
+        GameViewController controller = this;
+        AnimationTimer animator = new AnimationTimer() {
+            private long lastTime;
+
+            @Override
+            public void handle(long now) {
+                float dt = (float) (now - lastTime) / 1000000000;
+                dt = Math.min(1f / 30, dt);
+                lastTime = now;
+                game.update(dt);
+                controller.render();
+            }
+        };
+        animator.start();
     }
 
     public void setGame(Game game) {

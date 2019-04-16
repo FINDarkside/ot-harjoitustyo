@@ -33,7 +33,7 @@ public class GameBoard {
             for (Block block : group.getBlocks()) {
                 int x = group.getBlockCellX(block);
                 int y = group.getBlockCellY(block);
-                if (y < height && y >= 0) {
+                if (y < height && y >= 0 && x >= 0 && x < width) {
                     usedCells[y][x] = true;
                 }
             }
@@ -98,17 +98,12 @@ public class GameBoard {
         for (Block block : group.getBlocks()) {
             int minX = (int) Math.floor(group.getX() + block.getRelativeX());
             int minY = (int) Math.floor(group.getY() + block.getRelativeY());
-            int maxX = minX + (int) Math.ceil(group.getX() + block.getRelativeX());
-            int maxY = minY + (int) Math.ceil(group.getY() + block.getRelativeY());
+            int maxX = (int) Math.ceil(group.getX() + block.getRelativeX());
+            int maxY = (int) Math.ceil(group.getY() + block.getRelativeY());
             for (int y = minY; y <= maxY; y++) {
                 for (int x = minX; x <= maxX; x++) {
-                    if (y < 0) {
+                    if (y >= 0 && y < height && x >= 0 && x < width && usedCells[y][x]) {
                         return true;
-                    }
-                    if (y >= 0 && y < height && x >= 0 && x < width) {
-                        if (y >= 0 && y < height && x >= 0 && x < width && usedCells[y][x]) {
-                            return true;
-                        }
                     }
                 }
             }

@@ -76,5 +76,13 @@ public class Tetromino {
     public int getBlockCellY(Block b) {
         return (int) Math.ceil(this.y) + b.getRelativeY();
     }
+    
+    public float getMinY(){
+        float minY = Float.MAX_VALUE;
+        for(Block block : blocks){
+            minY = Math.min(minY, block.getRelativeY() + y);
+        }
+        return minY;
+    }
 
 }
