@@ -77,6 +77,11 @@ public class Tetromino {
         return (int) Math.ceil(this.y) + b.getRelativeY();
     }
 
+    /**
+     * Returns the minimum y value of any block in the tetromino.
+     *
+     * @return minimum y value of any block in the tetromino
+     */
     public float getMinY() {
         float minY = Float.MAX_VALUE;
         for (Block block : blocks) {
@@ -85,6 +90,11 @@ public class Tetromino {
         return minY;
     }
 
+    /**
+     * Returns the minimum x value of any block in the tetromino.
+     *
+     * @return minimum x value of any block in the tetromino
+     */
     public float getMinX() {
         float minX = Float.MAX_VALUE;
         for (Block block : blocks) {
@@ -93,6 +103,11 @@ public class Tetromino {
         return minX;
     }
 
+    /**
+     * Returns the maximum x value of any block in the tetromino.
+     *
+     * @return maximum x value of any block in the tetromino
+     */
     public float getMaxX() {
         float maxX = 0;
         for (Block block : blocks) {

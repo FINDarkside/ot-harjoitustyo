@@ -58,16 +58,10 @@ public class Game {
 
     private void handleInput() {
         if (inputLeft) {
-            if (activeTetromino.getMinX() - 1 >= 0) {
-                activeTetromino.setX(activeTetromino.getX() - 1);
-            }
-            inputLeft = false;
+            moveLeft();
         }
         if (inputRight) {
-            if (activeTetromino.getMaxX() + 1 < board.getWidth()) {
-                activeTetromino.setX(activeTetromino.getX() + 1);
-            }
-            inputRight = false;
+            moveRight();
         }
         if (inputRotate) {
             activeTetromino.rotateClockwise();
@@ -82,10 +76,37 @@ public class Game {
     }
 
     /**
+     * Moves active tetromino left if possible.
+     */
+    private void moveLeft() {
+        if (activeTetromino.getMinX() - 1 >= 0) {
+            activeTetromino.setX(activeTetromino.getX() - 1);
+        }
+        if (board.collidesWithStaticBlocks(activeTetromino)) {
+            activeTetromino.setX(activeTetromino.getX() + 1);
+        }
+        inputLeft = false;
+    }
+
+    /**
+     * Moves active tetromino right if possible.
+     */
+    private void moveRight() {
+        if (activeTetromino.getMinX() + 1 < board.getWidth()) {
+            activeTetromino.setX(activeTetromino.getX() + 1);
+        }
+        if (board.collidesWithStaticBlocks(activeTetromino)) {
+            activeTetromino.setX(activeTetromino.getX() - 1);
+        }
+        inputRight = false;
+    }
+
+    /**
      * Moves all block groups that are falling. Block group is considered
      * falling, if none of its blocks have another block directly below that's
      * not falling and is not from the same group.
      *
+     * @param dt delta time since last frame (in seconds)
      * @return true if there was at least one falling block group, otherwise
      * false
      */
@@ -105,6 +126,7 @@ public class Game {
      * below that's not falling and is not from the same group.
      *
      * @param group Group to move down if it's falling
+     * @param dt delta time since last frame (in seconds)
      * @return true if the block group was falling, otherwise false
      */
     private boolean moveBlockGroupIfFalling(Tetromino group, float dt) {
@@ -134,22 +156,34 @@ public class Game {
         return board;
     }
 
-    public Tetromino getActiveBlockGroup() {
+    public Tetromino getActiveTetromino() {
         return activeTetromino;
     }
 
+    /**
+     * Sets input left as pressed.
+     */
     public void inputLeft() {
         inputLeft = true;
     }
 
+    /**
+     * Sets input right as pressed.
+     */
     public void inputRight() {
         inputRight = true;
     }
 
+    /**
+     * Sets input rotate as pressed.
+     */
     public void inputRotate() {
         inputRotate = true;
     }
 
+    /**
+     * Sets input down as pressed.
+     */
     public void inputDown() {
         inputDown = true;
     }

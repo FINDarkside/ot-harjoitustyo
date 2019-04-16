@@ -77,7 +77,7 @@ public class GameViewController implements Initializable {
         for (Tetromino group : game.getBoard().getBlockGroups()) {
             drawBlockGroup(group);
         }
-        drawBlockGroup(game.getActiveBlockGroup());
+        drawBlockGroup(game.getActiveTetromino());
         gc.setFill(Color.BLACK);
         gc.fillRect(1, 0, width, 1);
         gc.fillRect(0, height - 1, width, height - 2);
