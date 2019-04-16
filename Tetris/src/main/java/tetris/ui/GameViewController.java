@@ -26,6 +26,7 @@ public class GameViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         gc = canvas.getGraphicsContext2D();
         this.game = new Game(20, 10);
+        System.out.println("NEW GAME");
         canvas.setWidth(10 * pixelsPerCell);
         canvas.setHeight(20 * pixelsPerCell);
         startGameLoop();
@@ -58,7 +59,7 @@ public class GameViewController implements Initializable {
 
             @Override
             public void handle(long now) {
-                float dt = (float) (now - lastTime) / 1000000000;
+                float dt = (float) ((now - lastTime) / 1000000) / 1000;
                 dt = Math.min(1f / 30, dt);
                 lastTime = now;
                 game.update(dt);
@@ -66,12 +67,6 @@ public class GameViewController implements Initializable {
             }
         };
         animator.start();
-    }
-
-    public void setGame(Game game) {
-        this.game = game;
-        float height = (float) canvas.getHeight();
-        float width = (float) canvas.getWidth();
     }
 
     public void render() {

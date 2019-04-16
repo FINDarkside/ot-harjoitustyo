@@ -76,12 +76,17 @@ public class GameBoard {
      * @param y Row to clear, 0 is the bottom row
      */
     public void clearRow(int y) {
-        for (Tetromino group : blockGroups) {
+        Iterator<Tetromino> it = blockGroups.iterator();
+        while (it.hasNext()) {
+            Tetromino group = it.next();
             List<Block> blocks = group.getBlocks();
             for (int i = blocks.size() - 1; i >= 0; i--) {
                 if (group.getBlockCellY(blocks.get(i)) == y) {
                     blocks.remove(i);
                 }
+            }
+            if (blocks.isEmpty()) {
+                it.remove();
             }
         }
     }

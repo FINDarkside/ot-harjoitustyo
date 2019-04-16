@@ -43,6 +43,9 @@ public class Game {
         if (paused) {
             return;
         }
+        if (moveFallingBlockGroups(dt)) {
+            return;
+        }
         activeTetromino.setY(activeTetromino.getY() - VERTICAL_DROP_VELOCITY * dt);
         handleInput();
         if (board.collidesWithStaticBlocks(activeTetromino) || activeTetromino.getMinY() < 0) {
@@ -55,11 +58,15 @@ public class Game {
 
     private void handleInput() {
         if (inputLeft) {
-            activeTetromino.setX(activeTetromino.getX() - 1);
+            if (activeTetromino.getMinX() - 1 >= 0) {
+                activeTetromino.setX(activeTetromino.getX() - 1);
+            }
             inputLeft = false;
         }
         if (inputRight) {
-            activeTetromino.setX(activeTetromino.getX() + 1);
+            if (activeTetromino.getMaxX() + 1 < board.getWidth()) {
+                activeTetromino.setX(activeTetromino.getX() + 1);
+            }
             inputRight = false;
         }
         if (inputRotate) {
@@ -82,10 +89,10 @@ public class Game {
      * @return true if there was at least one falling block group, otherwise
      * false
      */
-    public boolean moveFallingBlockGroups() {
+    public boolean moveFallingBlockGroups(float dt) {
         boolean blocksFalling = false;
         for (Tetromino group : board.getBlockGroups()) {
-            if (this.moveBlockGroupIfFalling(group)) {
+            if (this.moveBlockGroupIfFalling(group, dt)) {
                 blocksFalling = true;
             }
         }
@@ -100,22 +107,26 @@ public class Game {
      * @param group Group to move down if it's falling
      * @return true if the block group was falling, otherwise false
      */
-    private boolean moveBlockGroupIfFalling(Tetromino group) {
+    private boolean moveBlockGroupIfFalling(Tetromino group, float dt) {
         boolean[][] usedCells = board.getUsedCells();
         for (Block block : group.getBlocks()) {
-            usedCells[group.getBlockCellY(block)][group.getBlockCellX(block)] = false;
+            int x = group.getBlockCellX(block);
+            int y = group.getBlockCellY(block);
+            if (x >= 0 && x < board.getWidth() && y >= 0 && y < board.getHeight()) {
+                usedCells[y][x] = false;
+            }
         }
         for (Block block : group.getBlocks()) {
             int x = group.getBlockCellX(block);
             int y = group.getBlockCellY(block);
-            if (y <= 0 || usedCells[y][x]) {
+            if (y <= 0 || usedCells[y - 1][x]) {
                 if (group.getY() != Math.floor(group.getY())) {
                     group.setY((float) Math.floor(group.getY()) + 1);
                 }
                 return false;
             }
         }
-        group.setY(group.getY() - 1);
+        group.setY(group.getY() - VERTICAL_DROP_VELOCITY * 2 * dt);
         return true;
     }
 
