@@ -28,7 +28,7 @@ mvn test
 mvn test jacoco:report
 ```
 
-## Checkstyle
+**Checkstyle**
 
 ```
 mvn jxr:jxr checkstyle:checkstyle
