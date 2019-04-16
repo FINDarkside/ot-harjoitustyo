@@ -2,6 +2,8 @@
 
 Tetris klooni.
 
+Kontrolleina toimivat nuolinäppäimet. Vasen ja oikea nuoli siirtää tippuvaa palikkaa, ylöspäin nuoli kääntää palikkaa ja alaspäin nuoli tiputtaa palikan pohjalle asti.
+
 ## Dokumentaatio
 
 [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
