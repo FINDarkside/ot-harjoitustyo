@@ -94,8 +94,8 @@ public class GameViewController implements Initializable {
         float height = (float) canvas.getHeight();
         float width = (float) canvas.getWidth();
         for (Block block : group.getBlocks()) {
-            float x = (group.getX() + block.getRelativeX()) * pixelsPerCell;
-            float y = height - (group.getY() + block.getRelativeY()) * pixelsPerCell;
+            double x = Math.floor((group.getX() + block.getRelativeX()) * pixelsPerCell);
+            double y = Math.floor(height - (group.getY() + block.getRelativeY()) * pixelsPerCell);
 
             Color color = Color.web(block.getColor());
             gc.setFill(color.darker());
@@ -112,8 +112,8 @@ public class GameViewController implements Initializable {
             usedCells.add(new Point2D(block.getRelativeX(), block.getRelativeY()));
         }
         for (Block block : tetromino.getBlocks()) {
-            float x = (tetromino.getX() + block.getRelativeX()) * pixelsPerCell;
-            float y = canvasHeight - (tetromino.getY() + block.getRelativeY()) * pixelsPerCell;
+            double x = Math.floor((tetromino.getX() + block.getRelativeX()) * pixelsPerCell);
+            double y = Math.floor(canvasHeight - (tetromino.getY() + block.getRelativeY()) * pixelsPerCell);
             Color color = Color.web(block.getColor()).darker();
             gc.setFill(color);
             if (!usedCells.contains(new Point2D(block.getRelativeX() - 1, block.getRelativeY()))) {
