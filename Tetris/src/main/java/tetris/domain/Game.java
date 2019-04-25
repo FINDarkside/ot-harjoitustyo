@@ -92,7 +92,7 @@ public class Game {
      * Moves active tetromino right if possible.
      */
     private void moveRight() {
-        if (activeTetromino.getMinX() + 1 < board.getWidth()) {
+        if (activeTetromino.getMaxX() + 1 < board.getWidth()) {
             activeTetromino.setX(activeTetromino.getX() + 1);
         }
         if (board.collidesWithStaticBlocks(activeTetromino)) {
