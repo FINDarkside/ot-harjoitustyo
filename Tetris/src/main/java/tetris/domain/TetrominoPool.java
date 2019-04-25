@@ -33,7 +33,7 @@ public class TetrominoPool {
     private void generate() {
         this.pool.clear();
         for (TetrominoType type : TetrominoType.values()) {
-            this.pool.add(factory.create(type, "#333"));
+            this.pool.add(factory.create(type, "#4286f4"));
         }
         Collections.shuffle(pool);
     }

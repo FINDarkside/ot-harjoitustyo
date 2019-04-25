@@ -1,11 +1,12 @@
 package tetris.ui;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -23,13 +24,18 @@ public class GameViewController implements Initializable {
     private int borderWidth = 2;
     private Game game;
 
+    private float canvasHeight;
+    private float canvasWidth;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gc = canvas.getGraphicsContext2D();
         this.game = new Game(20, 10);
         System.out.println("NEW GAME");
-        canvas.setWidth(10 * pixelsPerCell);
-        canvas.setHeight(20 * pixelsPerCell);
+        canvasHeight = 20 * pixelsPerCell;
+        canvasWidth = 10 * pixelsPerCell;
+        canvas.setWidth(canvasWidth);
+        canvas.setHeight(canvasHeight);
         startGameLoop();
     }
 
@@ -71,19 +77,17 @@ public class GameViewController implements Initializable {
     }
 
     public void render() {
-        float height = (float) canvas.getHeight();
-        float width = (float) canvas.getWidth();
-        gc.clearRect(0, 0, width, height);
+        gc.clearRect(0, 0, canvasWidth, canvasHeight);
 
         for (Tetromino group : game.getBoard().getBlockGroups()) {
             drawBlockGroup(group);
         }
         drawBlockGroup(game.getActiveTetromino());
         gc.setFill(Color.BLACK);
-        gc.fillRect(1, 0, width, 1);
-        gc.fillRect(0, height - 1, width, height - 2);
-        gc.fillRect(0, 0, 1, height);
-        gc.fillRect(width - 1, 0, width, height);
+        gc.fillRect(1, 0, canvasWidth, 1);
+        gc.fillRect(0, canvasHeight - 1, canvasWidth, canvasHeight - 2);
+        gc.fillRect(0, 0, 1, canvasHeight);
+        gc.fillRect(canvasWidth - 1, 0, canvasWidth, canvasHeight);
     }
 
     private void drawBlockGroup(Tetromino group) {
@@ -92,16 +96,39 @@ public class GameViewController implements Initializable {
         for (Block block : group.getBlocks()) {
             float x = (group.getX() + block.getRelativeX()) * pixelsPerCell;
             float y = height - (group.getY() + block.getRelativeY()) * pixelsPerCell;
-            drawBlock(block, x, y);
+
+            Color color = Color.web(block.getColor());
+            gc.setFill(color.darker());
+            gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
+            gc.setFill(color);
+            gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
         }
+        drawTetrominoBorders(group);
     }
 
-    private void drawBlock(Block block, float x, float y) {
-        Color color = Color.web(block.getColor());
-        gc.setFill(color.darker());
-        gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
-        gc.setFill(color);
-        gc.fillRect(x + borderWidth, y - pixelsPerCell + borderWidth, pixelsPerCell - borderWidth * 2, pixelsPerCell - 2 * borderWidth);
+    private void drawTetrominoBorders(Tetromino tetromino) {
+        HashSet<Point2D> usedCells = new HashSet<>();
+        for (Block block : tetromino.getBlocks()) {
+            usedCells.add(new Point2D(block.getRelativeX(), block.getRelativeY()));
+        }
+        for (Block block : tetromino.getBlocks()) {
+            float x = (tetromino.getX() + block.getRelativeX()) * pixelsPerCell;
+            float y = canvasHeight - (tetromino.getY() + block.getRelativeY()) * pixelsPerCell;
+            Color color = Color.web(block.getColor()).darker();
+            gc.setFill(color);
+            if (!usedCells.contains(new Point2D(block.getRelativeX() - 1, block.getRelativeY()))) {
+                gc.fillRect(x, y - pixelsPerCell, borderWidth, pixelsPerCell);
+            }
+            if (!usedCells.contains(new Point2D(block.getRelativeX() + 1, block.getRelativeY()))) {
+                gc.fillRect(x + pixelsPerCell - borderWidth, y - pixelsPerCell, borderWidth, pixelsPerCell);
+            }
+            if (!usedCells.contains(new Point2D(block.getRelativeX(), block.getRelativeY() - 1))) {
+                gc.fillRect(x, y - borderWidth, pixelsPerCell, borderWidth);
+            }
+            if (!usedCells.contains(new Point2D(block.getRelativeX(), block.getRelativeY() + 1))) {
+                gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, borderWidth);
+            }
+        }
     }
 
 }
