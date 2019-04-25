@@ -20,6 +20,7 @@ public class GameViewController implements Initializable {
     private GraphicsContext gc;
 
     private float pixelsPerCell = 25;
+    private int borderWidth = 2;
     private Game game;
 
     @Override
@@ -89,11 +90,18 @@ public class GameViewController implements Initializable {
         float height = (float) canvas.getHeight();
         float width = (float) canvas.getWidth();
         for (Block block : group.getBlocks()) {
-            gc.setFill(Color.BLUE);
             float x = (group.getX() + block.getRelativeX()) * pixelsPerCell;
             float y = height - (group.getY() + block.getRelativeY()) * pixelsPerCell;
-            gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
+            drawBlock(block, x, y);
         }
+    }
+
+    private void drawBlock(Block block, float x, float y) {
+        Color color = Color.web(block.getColor());
+        gc.setFill(color.darker());
+        gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
+        gc.setFill(color);
+        gc.fillRect(x + borderWidth, y - pixelsPerCell + borderWidth, pixelsPerCell - borderWidth * 2, pixelsPerCell - 2 * borderWidth);
     }
 
 }
