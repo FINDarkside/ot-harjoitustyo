@@ -50,7 +50,6 @@ public class TetrominoPool {
             String color = "#" + String.format("%02x", r.nextInt(255))
                     + String.format("%02x", r.nextInt(255))
                     + String.format("%02x", r.nextInt(255));
-            System.out.println(color);
             this.pool.add(factory.create(type, color));
         }
         Collections.shuffle(pool);
