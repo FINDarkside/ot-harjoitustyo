@@ -16,26 +16,23 @@ import javafx.scene.paint.Color;
 import tetris.domain.*;
 
 public class GameViewController implements Initializable {
-    
+
     @FXML
     private Canvas canvas;
     @FXML
     private Canvas nextTetrominoCanvas;
     @FXML
     private Label scoreLabel;
-    
-    private GraphicsContext gc;
-    
+
     private float pixelsPerCell = 25;
     private int borderWidth = 2;
     private Game game;
-    
+
     private float canvasHeight;
     private float canvasWidth;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        gc = canvas.getGraphicsContext2D();
         this.game = new Game(20, 10);
         System.out.println("NEW GAME");
         canvasHeight = 20 * pixelsPerCell;
@@ -44,7 +41,7 @@ public class GameViewController implements Initializable {
         canvas.setHeight(canvasHeight);
         startGameLoop();
     }
-    
+
     public void setupListeners() {
         Scene scene = canvas.getScene();
         scene.setOnKeyPressed((KeyEvent event) -> {
@@ -64,12 +61,12 @@ public class GameViewController implements Initializable {
             }
         });
     }
-    
+
     private void startGameLoop() {
         GameViewController controller = this;
         AnimationTimer animator = new AnimationTimer() {
             private long lastTime;
-            
+
             @Override
             public void handle(long now) {
                 float dt = (float) ((now - lastTime) / 1000000) / 1000;
@@ -82,36 +79,37 @@ public class GameViewController implements Initializable {
         };
         animator.start();
     }
-    
+
     public void render() {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvasWidth, canvasHeight);
-        
+
         for (Tetromino group : game.getBoard().getBlockGroups()) {
-            drawBlockGroup(group);
+            drawBlockGroup(group, gc);
         }
-        drawBlockGroup(game.getActiveTetromino());
+        drawBlockGroup(game.getActiveTetromino(), gc);
         gc.setFill(Color.BLACK);
         gc.fillRect(1, 0, canvasWidth, 1);
         gc.fillRect(0, canvasHeight - 1, canvasWidth, canvasHeight - 2);
         gc.fillRect(0, 0, 1, canvasHeight);
         gc.fillRect(canvasWidth - 1, 0, canvasWidth, canvasHeight);
     }
-    
-    private void drawBlockGroup(Tetromino group) {
+
+    private void drawBlockGroup(Tetromino group, GraphicsContext gc) {
         float height = (float) canvas.getHeight();
         float width = (float) canvas.getWidth();
         for (Block block : group.getBlocks()) {
             double x = Math.floor((group.getX() + block.getRelativeX()) * pixelsPerCell);
             double y = Math.floor(height - (group.getY() + block.getRelativeY()) * pixelsPerCell);
-            
+
             Color color = Color.web(block.getColor());
             gc.setFill(color);
             gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
         }
-        drawTetrominoBorders(group);
+        drawTetrominoBorders(group, gc);
     }
-    
-    private void drawTetrominoBorders(Tetromino tetromino) {
+
+    private void drawTetrominoBorders(Tetromino tetromino, GraphicsContext gc) {
         HashSet<Point2D> usedCells = new HashSet<>();
         for (Block block : tetromino.getBlocks()) {
             usedCells.add(new Point2D(block.getRelativeX(), block.getRelativeY()));
@@ -135,5 +133,5 @@ public class GameViewController implements Initializable {
             }
         }
     }
-    
+
 }
