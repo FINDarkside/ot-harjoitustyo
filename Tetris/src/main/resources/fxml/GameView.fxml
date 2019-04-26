@@ -7,6 +7,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.canvas.Canvas?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tetris.ui.GameViewController">
-    <Canvas fx:id="canvas" height="450.0" width="300"></Canvas>
-</AnchorPane>
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="tetris.ui.GameViewController">
+    <children>
+        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="302.0">
+            <children>
+                <HBox prefHeight="379.0" prefWidth="302.0">
+                    <children>
+                        <Canvas fx:id="canvas" height="450.0" width="300"></Canvas>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <Label layoutX="14.0" layoutY="14.0" text="Next tetromino" />
+                                <Canvas height="94.0" layoutY="31.0" width="139.0" />
+                                <Label layoutX="14.0" layoutY="136.0" prefHeight="17.0" prefWidth="44.0" text="Score:" />
+                                <Label layoutX="58.0" layoutY="136.0" prefHeight="17.0" prefWidth="44.0" text="0" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</HBox>
