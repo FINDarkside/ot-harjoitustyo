@@ -17,7 +17,7 @@ public class TetrominoPool {
     }
 
     /**
-     * Returns next tetromino from the pool.
+     * Returns and removes next tetromino from the pool.
      *
      * @return next tetromino from the pool
      */
@@ -26,6 +26,18 @@ public class TetrominoPool {
             this.generate();
         }
         return pool.remove(pool.size() - 1);
+    }
+
+    /**
+     * Returns next tetromino from the pool.
+     *
+     * @return next tetromino from the pool
+     */
+    public Tetromino peekNext() {
+        if (pool.isEmpty()) {
+            this.generate();
+        }
+        return pool.get(pool.size() - 1);
     }
 
     /**

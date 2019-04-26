@@ -93,11 +93,12 @@ public class GameViewController implements Initializable {
         gc.fillRect(0, canvasHeight - 1, canvasWidth, canvasHeight - 2);
         gc.fillRect(0, 0, 1, canvasHeight);
         gc.fillRect(canvasWidth - 1, 0, canvasWidth, canvasHeight);
+        renderNextTetromino();
     }
 
     private void drawBlockGroup(Tetromino group, GraphicsContext gc) {
-        float height = (float) canvas.getHeight();
-        float width = (float) canvas.getWidth();
+        float height = (float) gc.getCanvas().getHeight();
+        float width = (float) gc.getCanvas().getWidth();
         for (Block block : group.getBlocks()) {
             double x = Math.floor((group.getX() + block.getRelativeX()) * pixelsPerCell);
             double y = Math.floor(height - (group.getY() + block.getRelativeY()) * pixelsPerCell);
@@ -110,13 +111,15 @@ public class GameViewController implements Initializable {
     }
 
     private void drawTetrominoBorders(Tetromino tetromino, GraphicsContext gc) {
+        float height = (float) gc.getCanvas().getHeight();
+
         HashSet<Point2D> usedCells = new HashSet<>();
         for (Block block : tetromino.getBlocks()) {
             usedCells.add(new Point2D(block.getRelativeX(), block.getRelativeY()));
         }
         for (Block block : tetromino.getBlocks()) {
             double x = Math.floor((tetromino.getX() + block.getRelativeX()) * pixelsPerCell);
-            double y = Math.floor(canvasHeight - (tetromino.getY() + block.getRelativeY()) * pixelsPerCell);
+            double y = Math.floor(height - (tetromino.getY() + block.getRelativeY()) * pixelsPerCell);
             Color color = Color.web(block.getColor()).darker();
             gc.setFill(color);
             if (!usedCells.contains(new Point2D(block.getRelativeX() - 1, block.getRelativeY()))) {
@@ -132,6 +135,28 @@ public class GameViewController implements Initializable {
                 gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, borderWidth);
             }
         }
+    }
+
+    private void renderNextTetromino() {
+        GraphicsContext gc = nextTetrominoCanvas.getGraphicsContext2D();
+        float height = (float) nextTetrominoCanvas.getHeight();
+        float width = (float) nextTetrominoCanvas.getWidth();
+        gc.clearRect(0, 0, width, height);
+
+        Tetromino nextTetromino = game.getTetrominoPool().peekNext();
+        float minX = nextTetromino.getMinX() * pixelsPerCell;
+        float maxX = nextTetromino.getMaxX() * pixelsPerCell;
+        float minY = nextTetromino.getMinY() * pixelsPerCell;
+        float maxY = nextTetromino.getMaxY() * pixelsPerCell;
+
+        float centerX = (minX + maxX + pixelsPerCell) / 2;
+        float centerY = (minY + maxY + pixelsPerCell) / 2;
+        nextTetromino.setX(nextTetromino.getX() + (width / 2 - centerX) / pixelsPerCell);
+        nextTetromino.setY(nextTetromino.getY() + (height / 2 - centerY) / pixelsPerCell);
+        System.out.println("x:" + nextTetromino.getX());
+        System.out.println("y:" + nextTetromino.getY());
+
+        drawBlockGroup(nextTetromino, gc);
     }
 
 }

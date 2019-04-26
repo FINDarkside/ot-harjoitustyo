@@ -202,4 +202,8 @@ public class Game {
         return gameOver;
     }
 
+    public TetrominoPool getTetrominoPool() {
+        return tetrominoPool;
+    }
+
 }
