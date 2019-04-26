@@ -76,17 +76,30 @@ public class GameBoard {
      * @param y Row to clear, 0 is the bottom row
      */
     public void clearRow(int y) {
-        Iterator<Tetromino> it = blockGroups.iterator();
-        while (it.hasNext()) {
-            Tetromino group = it.next();
+        for (int j = blockGroups.size() - 1; j >= 0; j--) {
+            Tetromino group = blockGroups.get(j);
             List<Block> blocks = group.getBlocks();
+            boolean blocksRemoved = false;
             for (int i = blocks.size() - 1; i >= 0; i--) {
                 if (group.getBlockCellY(blocks.get(i)) == y) {
                     blocks.remove(i);
+                    blocksRemoved = true;
                 }
             }
-            if (blocks.isEmpty()) {
-                it.remove();
+            if (blocksRemoved) {
+                ArrayList<Block> newTetrominoBlocks = new ArrayList<>();
+                for (int i = blocks.size() - 1; i >= 0; i--) {
+                    if (group.getBlockCellY(blocks.get(i)) > y) {
+                        newTetrominoBlocks.add(blocks.remove(i));
+                    }
+                }
+                if (!newTetrominoBlocks.isEmpty()) {
+                    Tetromino newTetromino = new Tetromino(newTetrominoBlocks, group.getX(), group.getY());
+                    this.blockGroups.add(newTetromino);
+                }
+                if (blocks.isEmpty()) {
+                    blockGroups.remove(j);
+                }
             }
         }
     }

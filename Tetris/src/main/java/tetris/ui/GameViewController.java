@@ -153,8 +153,6 @@ public class GameViewController implements Initializable {
         float centerY = (minY + maxY + pixelsPerCell) / 2;
         nextTetromino.setX(nextTetromino.getX() + (width / 2 - centerX) / pixelsPerCell);
         nextTetromino.setY(nextTetromino.getY() + (height / 2 - centerY) / pixelsPerCell);
-        System.out.println("x:" + nextTetromino.getX());
-        System.out.println("y:" + nextTetromino.getY());
 
         drawBlockGroup(nextTetromino, gc);
     }
