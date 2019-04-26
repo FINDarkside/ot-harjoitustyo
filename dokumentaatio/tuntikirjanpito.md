@@ -13,4 +13,6 @@
 | 15.4 | 2    | Refaktorointi, tetrominojen satunnainen järjestys  |
 | 16.4 | 2    | Peli pelattavaan tilaan. Kontrollit yms.  |
 |  | 2    | Testien lisäys, sekvenssikaavio, release  |
-| Yhteensä   | 20   | | 
+| 26.4 | 1    | Tetrominojen reunojen piirtäminen  |
+|  | 1    | Debuggaus, "tyhjän päälle" jääneet tetrominot eivät välillä tipu alaspäin [#1](https://github.com/FINDarkside/ot-harjoitustyo/issues/1)  |
+| Yhteensä   | 22   | | 
