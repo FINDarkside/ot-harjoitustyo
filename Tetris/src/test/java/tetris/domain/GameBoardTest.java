@@ -90,4 +90,17 @@ public class GameBoardTest {
         assertEquals(true, gameBoard.collidesWithStaticBlocks(group));
     }
 
+    @Test
+    public void clearRowSplitsTetrominos() {
+        gameBoard.getBlockGroups().clear();
+        List<Block> l = new ArrayList<>();
+        l.add(new Block("#000", 0, 4));
+        l.add(new Block("#000", 0, 3));
+        l.add(new Block("#000", 0, 2));
+        Tetromino group = new Tetromino(l, 0, 0);
+        gameBoard.addBlockGroup(group);
+        gameBoard.clearRow(3);
+        assertEquals(2, gameBoard.getBlockGroups().size());   
+    }
+
 }
