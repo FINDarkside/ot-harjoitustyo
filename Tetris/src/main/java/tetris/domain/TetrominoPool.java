@@ -2,6 +2,7 @@ package tetris.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class TetrominoPool {
 
@@ -31,9 +32,14 @@ public class TetrominoPool {
      * Generates tetromino pool and shuffles it.
      */
     private void generate() {
+        Random r = new Random();
         this.pool.clear();
         for (TetrominoType type : TetrominoType.values()) {
-            this.pool.add(factory.create(type, "#4286f4"));
+            String color = "#" + String.format("%02x", r.nextInt(255))
+                    + String.format("%02x", r.nextInt(255))
+                    + String.format("%02x", r.nextInt(255));
+            System.out.println(color);
+            this.pool.add(factory.create(type, color));
         }
         Collections.shuffle(pool);
     }
