@@ -15,4 +15,6 @@
 |  | 2    | Testien lisäys, sekvenssikaavio, release  |
 | 26.4 | 1    | Tetrominojen reunojen piirtäminen  |
 |  | 1    | Debuggaus, "tyhjän päälle" jääneet tetrominot eivät välillä tipu alaspäin [#1](https://github.com/FINDarkside/ot-harjoitustyo/issues/1)  |
-| Yhteensä   | 22   | | 
+|  | 2    | Pelinäkymän parantaminen, [#1](https://github.com/FINDarkside/ot-harjoitustyo/issues/1) korjaaminen  |
+|  | 1    | käyttöohjeet, arkkitehtuuri  |
+| Yhteensä   | 25   | | 
