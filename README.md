@@ -8,6 +8,8 @@ Kontrolleina toimivat nuolinäppäimet. Vasen ja oikea nuoli siirtää tippuvaa 
 
 [Viikko 5](https://github.com/FINDarkside/ot-harjoitustyo/releases/tag/viikko5)
 
+[Viikko 6](https://github.com/FINDarkside/ot-harjoitustyo/releases/tag/viikko6)
+
 ## Dokumentaatio
 
 [Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
@@ -15,6 +17,8 @@ Kontrolleina toimivat nuolinäppäimet. Vasen ja oikea nuoli siirtää tippuvaa 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
 
 [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
+
+[Käyttöohjeet](dokumentaatio/käyttöohjeet.md)
 
 ## Komentorivitoiminnot
 
