@@ -98,8 +98,6 @@ public class GameViewController implements Initializable {
             double y = Math.floor(height - (group.getY() + block.getRelativeY()) * pixelsPerCell);
 
             Color color = Color.web(block.getColor());
-            gc.setFill(color.darker());
-            gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
             gc.setFill(color);
             gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
         }
