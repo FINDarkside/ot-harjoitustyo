@@ -53,7 +53,7 @@ public class Game {
         if (board.collidesWithStaticBlocks(activeTetromino) || activeTetromino.getMinY() < 0) {
             activeTetromino.setY((float) Math.floor(activeTetromino.getY()) + 1);
             board.addBlockGroup(activeTetromino);
-            if(activeTetromino.getMaxY() >= board.getHeight()){
+            if (activeTetromino.getMaxY() >= board.getHeight()) {
                 gameOver = true;
                 return;
             }
