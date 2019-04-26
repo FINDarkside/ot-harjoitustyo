@@ -91,6 +91,19 @@ public class Tetromino {
     }
 
     /**
+     * Returns the maximum y value of any block in the tetromino.
+     *
+     * @return maximum y value of any block in the tetromino
+     */
+    public float getMaxY() {
+        float maxY = -1;
+        for (Block block : blocks) {
+            maxY = Math.max(maxY, block.getRelativeY() + y);
+        }
+        return maxY;
+    }
+
+    /**
      * Returns the minimum x value of any block in the tetromino.
      *
      * @return minimum x value of any block in the tetromino

@@ -12,6 +12,7 @@ public class Game {
     private Tetromino activeTetromino;
     private TetrominoPool tetrominoPool = new TetrominoPool();
     private int score = 0;
+    private boolean gameOver = false;
 
     private boolean inputLeft, inputRight, inputRotate, inputDown;
 
@@ -41,7 +42,7 @@ public class Game {
      * @param dt Time since last update (in milliseconds)
      */
     public void update(float dt) {
-        if (paused) {
+        if (paused || gameOver) {
             return;
         }
         if (moveFallingBlockGroups(dt)) {
@@ -52,6 +53,10 @@ public class Game {
         if (board.collidesWithStaticBlocks(activeTetromino) || activeTetromino.getMinY() < 0) {
             activeTetromino.setY((float) Math.floor(activeTetromino.getY()) + 1);
             board.addBlockGroup(activeTetromino);
+            if(activeTetromino.getMaxY() >= board.getHeight()){
+                gameOver = true;
+                return;
+            }
             setNextTetromino();
         }
         score += board.clearFullRows();
@@ -191,6 +196,10 @@ public class Game {
 
     public int getScore() {
         return score;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
     }
 
 }
