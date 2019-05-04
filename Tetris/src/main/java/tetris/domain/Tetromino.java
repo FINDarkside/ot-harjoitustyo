@@ -33,6 +33,18 @@ public class Tetromino {
         }
     }
 
+    /**
+     * Rotates the block group anticlockwise.
+     */
+    public void rotateAnticlockwise() {
+        for (Block block : blocks) {
+            int x = block.getRelativeX();
+            int y = block.getRelativeY();
+            block.setRelativeX(-y - 1);
+            block.setRelativeY(x);
+        }
+    }
+
     public List<Block> getBlocks() {
         return blocks;
     }

@@ -70,7 +70,7 @@ public class Game {
             moveRight();
         }
         if (inputRotate) {
-            activeTetromino.rotateClockwise();
+            rotateActiveTetromino();
             inputRotate = false;
         }
         if (inputDown) {
@@ -78,6 +78,13 @@ public class Game {
                 activeTetromino.setY(activeTetromino.getY() - 1);
             }
             inputDown = false;
+        }
+    }
+    
+    private void rotateActiveTetromino(){
+        activeTetromino.rotateClockwise();
+        if(board.collidesWithStaticBlocks(activeTetromino) || board.isOutOfBounds(activeTetromino)){
+            activeTetromino.rotateAnticlockwise();
         }
     }
 
