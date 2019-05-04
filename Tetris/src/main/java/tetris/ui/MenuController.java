@@ -28,7 +28,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private void startGameClicked(ActionEvent event) throws IOException, InterruptedException {
-        MainApp.startGame();
+        MainApp.instance.getPaneManager().openGameView();
     }
 
 }

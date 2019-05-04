@@ -1,24 +1,33 @@
 package tetris.ui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import tetris.MainApp;
 import tetris.domain.*;
 
 public class GameViewController implements Initializable {
 
     @FXML
     private Canvas canvas;
+    @FXML
+    private AnchorPane canvasContainer;
     @FXML
     private Canvas nextTetrominoCanvas;
     @FXML
@@ -30,6 +39,8 @@ public class GameViewController implements Initializable {
 
     private float canvasHeight;
     private float canvasWidth;
+
+    private AnimationTimer animator;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -64,20 +75,34 @@ public class GameViewController implements Initializable {
 
     private void startGameLoop() {
         GameViewController controller = this;
-        AnimationTimer animator = new AnimationTimer() {
+        animator = new AnimationTimer() {
             private long lastTime;
 
             @Override
             public void handle(long now) {
-                float dt = (float) ((now - lastTime) / 1000000) / 1000;
-                dt = Math.min(1f / 30, dt);
-                lastTime = now;
-                game.update(dt);
-                controller.render();
-                scoreLabel.setText("" + game.getScore());
+                try {
+                    float dt = (float) ((now - lastTime) / 1000000) / 1000;
+                    dt = Math.min(1f / 30, dt);
+                    lastTime = now;
+                    game.update(dt);
+                    controller.render();
+                    scoreLabel.setText("" + game.getScore());
+                    if (game.isGameOver()) {
+                        gameEnd();
+                        animator.stop();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
             }
         };
         animator.start();
+    }
+
+    private void gameEnd() throws IOException {
+        System.out.println("Game end");
+        MainApp.instance.getPaneManager().openScoreSubmitView(game.getScore());
     }
 
     public void render() {
