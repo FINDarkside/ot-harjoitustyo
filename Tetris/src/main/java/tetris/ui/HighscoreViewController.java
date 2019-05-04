@@ -3,6 +3,7 @@ package tetris.ui;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -21,6 +22,11 @@ public class HighscoreViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+    }
+    
+    @FXML
+    private void menuClicked(ActionEvent event) {
+        MainApp.instance.getPaneManager().openMenu();
     }
 
     public void setScores(List<Highscore> scores) {
