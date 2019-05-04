@@ -80,10 +80,10 @@ public class Game {
             inputDown = false;
         }
     }
-    
-    private void rotateActiveTetromino(){
+
+    private void rotateActiveTetromino() {
         activeTetromino.rotateClockwise();
-        if(board.collidesWithStaticBlocks(activeTetromino) || board.isOutOfBounds(activeTetromino)){
+        if (board.collidesWithStaticBlocks(activeTetromino) || board.isOutOfBounds(activeTetromino)) {
             activeTetromino.rotateAnticlockwise();
         }
     }

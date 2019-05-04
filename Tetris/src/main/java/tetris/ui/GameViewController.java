@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -92,7 +93,10 @@ public class GameViewController implements Initializable {
                         animator.stop();
                     }
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    animator.stop();
+                    MainApp.instance.getPaneManager().openMenu();
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error in game loop. Returning back to main menu.\n" + ex.toString());
+                    alert.show();
                 }
 
             }
