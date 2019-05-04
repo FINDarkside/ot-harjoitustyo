@@ -32,7 +32,7 @@ public class DbHighscoreDao implements HighscoreDao {
     @Override
     public List<Highscore> getAll() throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT * FROM highscore ORDER BY score");
+        ResultSet rs = statement.executeQuery("SELECT * FROM highscore ORDER BY score DESC");
         List<Highscore> highscores = new ArrayList<>();
         while (rs.next()) {
             highscores.add(new Highscore(rs.getInt("score"), rs.getString("name"), rs.getString("date")));
