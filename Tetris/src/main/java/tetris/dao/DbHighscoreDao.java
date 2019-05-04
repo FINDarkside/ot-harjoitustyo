@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import tetris.domain.Highscore;
 
-public class dbHighscoreDao implements HighscoreDao {
+public class DbHighscoreDao implements HighscoreDao {
 
     private final String connectionUrl;
 
-    public dbHighscoreDao(String connectionUrl) throws SQLException {
+    public DbHighscoreDao(String connectionUrl) throws SQLException {
         this.connectionUrl = connectionUrl;
         createDb();
     }
