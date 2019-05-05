@@ -133,19 +133,6 @@ public class GameBoard {
     }
 
     /**
-     * Checks if the given tetromino is withing board bounds.
-     *
-     * @param tetromino tetromino to be checked
-     * @return value indicating whether given tetromino is within board bounds.
-     */
-    public boolean isOutOfBounds(Tetromino tetromino) {
-        return tetromino.getMinX() < 0
-                || tetromino.getMaxX() > width - 1
-                || tetromino.getMinY() < 0
-                || tetromino.getMaxY() > height - 1;
-    }
-
-    /**
      * Checks the map for full rows, and removes them when found. If blocks are
      * left floating, they will be moved down until they hit another block.
      *

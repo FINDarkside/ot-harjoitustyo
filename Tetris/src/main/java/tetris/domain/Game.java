@@ -81,7 +81,10 @@ public class Game {
 
     private void rotateActiveTetromino() {
         activeTetromino.rotateClockwise();
-        if (board.collidesWithStaticBlocks(activeTetromino) || board.isOutOfBounds(activeTetromino)) {
+        if (board.collidesWithStaticBlocks(activeTetromino)
+                || activeTetromino.getMinX() < 0
+                || activeTetromino.getMaxX() > board.getWidth() - 1
+                || activeTetromino.getMinY() < 0) {
             activeTetromino.rotateAnticlockwise();
         }
     }
