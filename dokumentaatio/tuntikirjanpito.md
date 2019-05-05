@@ -18,4 +18,5 @@
 |  | 2    | Pelinäkymän parantaminen, [#1](https://github.com/FINDarkside/ot-harjoitustyo/issues/1) korjaaminen  |
 |  | 1    | käyttöohjeet, arkkitehtuuri  |
 | 4.5  | 5    | leaderboards toiminnallisuus (sqlite) ja siihen liittyvät näkymät  |
-| Yhteensä   | 30   | | 
+| 5.5  | 3    | Pelien tallennus toiminnallisuus ja siihen liittyvät näkymät  |
+| Yhteensä   | 33   | | 
