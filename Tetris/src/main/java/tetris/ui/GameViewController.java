@@ -113,10 +113,10 @@ public class GameViewController implements Initializable {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvasWidth, canvasHeight);
 
-        for (Tetromino group : game.getBoard().getBlockGroups()) {
-            drawBlockGroup(group, gc);
+        for (Tetromino tetromino : game.getBoard().getTetrominoes()) {
+            drawTetromino(tetromino, gc);
         }
-        drawBlockGroup(game.getActiveTetromino(), gc);
+        drawTetromino(game.getActiveTetromino(), gc);
         renderPredictedPosition();
 
         gc.setFill(Color.BLACK);
@@ -127,18 +127,18 @@ public class GameViewController implements Initializable {
         renderNextTetromino();
     }
 
-    private void drawBlockGroup(Tetromino group, GraphicsContext gc) {
+    private void drawTetromino(Tetromino tetromino, GraphicsContext gc) {
         float height = (float) gc.getCanvas().getHeight();
         float width = (float) gc.getCanvas().getWidth();
-        for (Block block : group.getBlocks()) {
-            double x = Math.floor((group.getX() + block.getRelativeX()) * pixelsPerCell);
-            double y = Math.floor(height - (group.getY() + block.getRelativeY()) * pixelsPerCell);
+        for (Block block : tetromino.getBlocks()) {
+            double x = Math.floor((tetromino.getX() + block.getRelativeX()) * pixelsPerCell);
+            double y = Math.floor(height - (tetromino.getY() + block.getRelativeY()) * pixelsPerCell);
 
             Color color = Color.web(block.getColor());
             gc.setFill(color);
             gc.fillRect(x, y - pixelsPerCell, pixelsPerCell, pixelsPerCell);
         }
-        drawTetrominoBorders(group, gc);
+        drawTetrominoBorders(tetromino, gc);
     }
 
     private void drawTetrominoBorders(Tetromino tetromino, GraphicsContext gc) {
@@ -185,7 +185,7 @@ public class GameViewController implements Initializable {
         nextTetromino.setX(nextTetromino.getX() + (width / 2 - centerX) / pixelsPerCell);
         nextTetromino.setY(nextTetromino.getY() + (height / 2 - centerY) / pixelsPerCell);
 
-        drawBlockGroup(nextTetromino, gc);
+        drawTetromino(nextTetromino, gc);
     }
 
     private void renderPredictedPosition() {

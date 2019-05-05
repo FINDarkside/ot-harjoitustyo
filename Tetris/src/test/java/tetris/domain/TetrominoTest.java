@@ -4,7 +4,7 @@ import java.util.*;
 import org.junit.*;
 import static org.junit.Assert.*;
 
-public class BlockGroupTest {
+public class TetrominoTest {
 
     @Test
     public void oneBlockRotationWorks() {
@@ -17,11 +17,11 @@ public class BlockGroupTest {
         ArrayList<Block> blocks = new ArrayList();
         blocks.add(new Block("#00", 0, 0));
 
-        Tetromino group = new Tetromino(blocks, 0, 0);
+        Tetromino tetromino = new Tetromino(blocks, 0, 0);
         for (int i = 0; i < expectedResult.length; i++) {
-            group.rotateClockwise();
-            assertEquals(expectedResult[i][0], group.getBlocks().get(0).getRelativeX());
-            assertEquals(expectedResult[i][1], group.getBlocks().get(0).getRelativeY());
+            tetromino.rotateClockwise();
+            assertEquals(expectedResult[i][0], tetromino.getBlocks().get(0).getRelativeX());
+            assertEquals(expectedResult[i][1], tetromino.getBlocks().get(0).getRelativeY());
         }
     }
 
@@ -39,14 +39,14 @@ public class BlockGroupTest {
         blocks.add(new Block("#000", 3, 2));
         blocks.add(new Block("#000", 2, 3));
 
-        Tetromino group = new Tetromino(blocks, 0, 0);
+        Tetromino tetromino = new Tetromino(blocks, 0, 0);
         for (int i = 0;
                 i < expectedResult.length;
                 i++) {
-            group.rotateClockwise();
+            tetromino.rotateClockwise();
             for (int j = 0; j < expectedResult[i].length; j += 2) {
-                assertEquals(expectedResult[i][j], group.getBlocks().get(j / 2).getRelativeX());
-                assertEquals(expectedResult[i][j + 1], group.getBlocks().get(j / 2).getRelativeY());
+                assertEquals(expectedResult[i][j], tetromino.getBlocks().get(j / 2).getRelativeX());
+                assertEquals(expectedResult[i][j + 1], tetromino.getBlocks().get(j / 2).getRelativeY());
             }
         }
     }

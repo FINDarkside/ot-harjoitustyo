@@ -2,7 +2,7 @@ package tetris.domain;
 
 public class Game {
 
-    // Speed the block group drops at (blocks per second)
+    // Speed tetrominos fall at (blocks per second)
     private static final float VERTICAL_DROP_VELOCITY = 4;
 
     private GameBoard board;
@@ -26,7 +26,7 @@ public class Game {
     }
 
     /**
-     * Creates and sets new active block group.
+     * Creates and sets new active tetromino.
      */
     public void setNextTetromino() {
         activeTetromino = tetrominoPool.getNext();
@@ -43,14 +43,14 @@ public class Game {
         if (paused || gameOver) {
             return;
         }
-        if (moveFallingBlockGroups(dt)) {
+        if (moveFallingTetrominos(dt)) {
             return;
         }
         activeTetromino.setY(activeTetromino.getY() - VERTICAL_DROP_VELOCITY * dt);
         handleInput();
         if (board.collidesWithStaticBlocks(activeTetromino) || activeTetromino.getMinY() < 0) {
             activeTetromino.setY((float) Math.floor(activeTetromino.getY()) + 1);
-            board.addBlockGroup(activeTetromino);
+            board.addTetromino(activeTetromino);
             if (activeTetromino.getMaxY() >= board.getHeight()) {
                 gameOver = true;
                 return;
@@ -113,18 +113,17 @@ public class Game {
     }
 
     /**
-     * Moves all block groups that are falling. Block group is considered
-     * falling, if none of its blocks have another block directly below that's
-     * not falling and is not from the same group.
+     * Moves all tetrominoes that are falling. Tetromino is considered falling,
+     * if none of its blocks have another block directly below them, which is
+     * not falling and is not from the same tetromino.
      *
      * @param dt delta time since last frame (in seconds)
-     * @return true if there was at least one falling block group, otherwise
-     * false
+     * @return true if there was at least one falling tetromino, otherwise false
      */
-    public boolean moveFallingBlockGroups(float dt) {
+    public boolean moveFallingTetrominos(float dt) {
         boolean blocksFalling = false;
-        for (Tetromino group : board.getBlockGroups()) {
-            if (this.moveBlockGroupIfFalling(group, dt)) {
+        for (Tetromino tetromino : board.getTetrominoes()) {
+            if (this.moveTetrominoIfFalling(tetromino, dt)) {
                 blocksFalling = true;
             }
         }
@@ -148,27 +147,27 @@ public class Game {
     }
 
     /**
-     * Moves the given block group down if it's falling. Block group is
-     * considered falling, if none of its blocks have another block directly
-     * below that's not falling and is not from the same group.
+     * Moves the given tetromino down if it's falling. Tetromino is considered
+     * falling, if none of its blocks have another block directly below them,
+     * which is not falling and is not from the same tetromino.
      *
-     * @param group Group to move down if it's falling
+     * @param tetromino Tetromino to move down if it's falling
      * @param dt delta time since last frame (in seconds)
-     * @return true if the block group was falling, otherwise false
+     * @return true if tetromino was falling, otherwise false
      */
-    private boolean moveBlockGroupIfFalling(Tetromino group, float dt) {
-        boolean[][] usedCells = board.getUsedCellsExcludingTetromino(group);
-        for (Block block : group.getBlocks()) {
-            int x = group.getBlockCellX(block);
-            int y = group.getBlockCellY(block);
+    private boolean moveTetrominoIfFalling(Tetromino tetromino, float dt) {
+        boolean[][] usedCells = board.getUsedCellsExcludingTetromino(tetromino);
+        for (Block block : tetromino.getBlocks()) {
+            int x = tetromino.getBlockCellX(block);
+            int y = tetromino.getBlockCellY(block);
             if (y <= 0 || usedCells[y - 1][x]) {
-                if (group.getY() != Math.floor(group.getY())) {
-                    group.setY((float) Math.floor(group.getY()) + 1);
+                if (tetromino.getY() != Math.floor(tetromino.getY())) {
+                    tetromino.setY((float) Math.floor(tetromino.getY()) + 1);
                 }
                 return false;
             }
         }
-        group.setY(group.getY() - VERTICAL_DROP_VELOCITY * 2 * dt);
+        tetromino.setY(tetromino.getY() - VERTICAL_DROP_VELOCITY * 2 * dt);
         return true;
     }
 

@@ -9,11 +9,11 @@ public class Tetromino {
     private float y;
 
     /**
-     * Creates new {@code BlockGroup}.
+     * Creates new {@code Tetromino}.
      *
-     * @param blocks Array of {@code BlockGroupItem}
-     * @param x x coordinate of the group
-     * @param y y coordinate of the group
+     * @param blocks List of {@code Block}
+     * @param x x coordinate of the tetromino
+     * @param y y coordinate of the tetromino
      */
     public Tetromino(List<Block> blocks, float x, float y) {
         this.blocks = blocks;
@@ -22,7 +22,7 @@ public class Tetromino {
     }
 
     /**
-     * Rotates the block group clockwise.
+     * Rotates tetromino clockwise.
      */
     public void rotateClockwise() {
         for (Block block : blocks) {
@@ -34,7 +34,7 @@ public class Tetromino {
     }
 
     /**
-     * Rotates the block group anticlockwise.
+     * Rotates tetromino anticlockwise.
      */
     public void rotateAnticlockwise() {
         for (Block block : blocks) {

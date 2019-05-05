@@ -20,7 +20,7 @@ public class GameBoardTest {
                 if (j >= i) {
                     List<Block> l = new ArrayList<>();
                     l.add(new Block("#000", 0, 0));
-                    gameBoard.addBlockGroup(new Tetromino(l, j, i));
+                    gameBoard.addTetromino(new Tetromino(l, j, i));
                 }
             }
         }
@@ -76,8 +76,8 @@ public class GameBoardTest {
     public void collidesWithStaticBlockTest1() {
         List<Block> l = new ArrayList<>();
         l.add(new Block("#000", 0, 0));
-        Tetromino group = new Tetromino(l, 0, n - 1);
-        assertEquals(false, gameBoard.collidesWithStaticBlocks(group));
+        Tetromino tetromino = new Tetromino(l, 0, n - 1);
+        assertEquals(false, gameBoard.collidesWithStaticBlocks(tetromino));
     }
 
     @Test
@@ -86,21 +86,21 @@ public class GameBoardTest {
         l.add(new Block("#000", 0, 0));
         l.add(new Block("#000", 1, 0));
         l.add(new Block("#000", 2, 0));
-        Tetromino group = new Tetromino(l, 7, n - 1);
-        assertEquals(true, gameBoard.collidesWithStaticBlocks(group));
+        Tetromino tetromino = new Tetromino(l, 7, n - 1);
+        assertEquals(true, gameBoard.collidesWithStaticBlocks(tetromino));
     }
 
     @Test
     public void clearRowSplitsTetrominos() {
-        gameBoard.getBlockGroups().clear();
+        gameBoard.getTetrominoes().clear();
         List<Block> l = new ArrayList<>();
         l.add(new Block("#000", 0, 4));
         l.add(new Block("#000", 0, 3));
         l.add(new Block("#000", 0, 2));
-        Tetromino group = new Tetromino(l, 0, 0);
-        gameBoard.addBlockGroup(group);
+        Tetromino tetromino = new Tetromino(l, 0, 0);
+        gameBoard.addTetromino(tetromino);
         gameBoard.clearRow(3);
-        assertEquals(2, gameBoard.getBlockGroups().size());   
+        assertEquals(2, gameBoard.getTetrominoes().size());   
     }
 
 }

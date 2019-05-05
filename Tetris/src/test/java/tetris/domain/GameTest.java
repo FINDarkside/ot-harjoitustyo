@@ -46,7 +46,7 @@ public class GameTest {
     public void floatingStaticBlocksFall() {
         TetrominoFactory factory = new TetrominoFactory();
         Tetromino t = factory.create(TetrominoType.T, "#333");
-        game.getBoard().addBlockGroup(t);
+        game.getBoard().addTetromino(t);
         t.setX(2);
         t.setY(height / 2);
         for (int i = 0; i < height * 5; i++) {

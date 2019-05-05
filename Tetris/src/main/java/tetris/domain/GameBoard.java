@@ -6,7 +6,7 @@ public class GameBoard {
 
     private final int width;
     private final int height;
-    private List<Tetromino> blockGroups = new ArrayList<>();
+    private List<Tetromino> tetrominoes = new ArrayList<>();
 
     /**
      * Creates new GameBoard.
@@ -29,10 +29,10 @@ public class GameBoard {
         for (int i = 0; i < usedCells.length; i++) {
             Arrays.fill(usedCells[i], false);
         }
-        for (Tetromino group : blockGroups) {
-            for (Block block : group.getBlocks()) {
-                int x = group.getBlockCellX(block);
-                int y = group.getBlockCellY(block);
+        for (Tetromino tetromino : tetrominoes) {
+            for (Block block : tetromino.getBlocks()) {
+                int x = tetromino.getBlockCellX(block);
+                int y = tetromino.getBlockCellY(block);
                 if (y < height && y >= 0 && x >= 0 && x < width) {
                     usedCells[y][x] = true;
                 }
@@ -60,17 +60,17 @@ public class GameBoard {
         return usedCells;
     }
 
-    public List<Tetromino> getBlockGroups() {
-        return blockGroups;
+    public List<Tetromino> getTetrominoes() {
+        return tetrominoes;
     }
 
     /**
-     * Adds block group to the board.
+     * Adds tetromino to the board.
      *
-     * @param group group to add
+     * @param tetromino to add
      */
-    public void addBlockGroup(Tetromino group) {
-        this.blockGroups.add(group);
+    public void addTetromino(Tetromino tetromino) {
+        this.tetrominoes.add(tetromino);
     }
 
     /**
@@ -95,32 +95,32 @@ public class GameBoard {
      * @param y Row to clear, 0 is the bottom row
      */
     public void clearRow(int y) {
-        for (int j = blockGroups.size() - 1; j >= 0; j--) {
-            Tetromino tetromino = blockGroups.get(j);
+        for (int j = tetrominoes.size() - 1; j >= 0; j--) {
+            Tetromino tetromino = tetrominoes.get(j);
             Tetromino newTetromino = tetromino.removeBlockOnRow(y);
             if (newTetromino != null) {
-                this.blockGroups.add(newTetromino);
+                this.tetrominoes.add(newTetromino);
             }
             if (tetromino.getBlocks().isEmpty()) {
-                blockGroups.remove(j);
+                tetrominoes.remove(j);
             }
         }
     }
 
     /**
-     * Checks if the given block group collides with static blocks.
+     * Checks if the given tetromino collides with static blocks.
      *
-     * @param group Group to be checked against
-     * @return value indicating whether the given block group collides with
-     * static blocks.
+     * @param tetromino tetromino to be checked against
+     * @return value indicating whether the given tetromino collides with static
+     * blocks.
      */
-    public boolean collidesWithStaticBlocks(Tetromino group) {
+    public boolean collidesWithStaticBlocks(Tetromino tetromino) {
         boolean[][] usedCells = getUsedCells();
-        for (Block block : group.getBlocks()) {
-            int minX = (int) Math.floor(group.getX() + block.getRelativeX());
-            int minY = (int) Math.floor(group.getY() + block.getRelativeY());
-            int maxX = (int) Math.ceil(group.getX() + block.getRelativeX());
-            int maxY = (int) Math.ceil(group.getY() + block.getRelativeY());
+        for (Block block : tetromino.getBlocks()) {
+            int minX = (int) Math.floor(tetromino.getX() + block.getRelativeX());
+            int minY = (int) Math.floor(tetromino.getY() + block.getRelativeY());
+            int maxX = (int) Math.ceil(tetromino.getX() + block.getRelativeX());
+            int maxY = (int) Math.ceil(tetromino.getY() + block.getRelativeY());
             for (int y = minY; y <= maxY; y++) {
                 for (int x = minX; x <= maxX; x++) {
                     if (y >= 0 && y < height && x >= 0 && x < width && usedCells[y][x]) {

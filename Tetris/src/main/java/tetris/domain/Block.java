@@ -10,8 +10,8 @@ public class Block {
      * Creates new block.
      *
      * @param color Color of the block
-     * @param relativeX relative x position to other blocks in the same group
-     * @param relativeY relative y position to other blocks in the same group
+     * @param relativeX relative x position to other blocks in the same tetromino
+     * @param relativeY relative y position to other blocks in the same tetromino
      */
     public Block(String color, int relativeX, int relativeY) {
         this.color = color;
