@@ -18,7 +18,7 @@ Kun rivi on valmis, sen rivin palikat poistuvat. Peli loppuu kun joku palikka ei
 * Pelin voi keskeyttää ja jatkaa myöhemmin
 * Pelin voi tallentaa ja vanhaa peliä voi jatkaa myöhemmin (vaikka ohjelma olisi suljettu välillä)
 
-## Käyttöliittymään näkymät:
+## Käyttöliittymään näkymät
 
 * Päänäkymä - Sisältää painikkeet pelin aloitukseen, scoreboardille ja mahdollisesti muihin asioihin riippuen toteutetuista ominaisuuksista
 * Pelinäkymä - Sisältää itse pelin
