@@ -34,7 +34,7 @@ public class ScoreSubmitViewController implements Initializable {
         // TODO: Handle errors!
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        MainApp.instance.getHighscoreDao().create(new Highscore(score, nameField.getText(), dateFormat.format(date)));
+        MainApp.instance.getHighscoreDao().save(new Highscore(score, nameField.getText(), dateFormat.format(date)));
         MainApp.instance.getPaneManager().openHighscoreView();
     }
 

@@ -7,17 +7,18 @@ public interface HighscoreDao {
 
     /**
      * Creates new highscore.
-     * 
+     *
      * @param highscore Score to add
      * @throws Exception if exception occurs when adding highscore
      */
-    public void create(Highscore highscore) throws Exception;
+    public void save(Highscore highscore) throws Exception;
 
     /**
      * Returns all highscores sorted descending by score.
-     * 
+     *
      * @return List of all highscores, sorted descending by score.
      * @throws Exception if exception occurs when getting all scores
      */
     public List<Highscore> getAll() throws Exception;
+
 }

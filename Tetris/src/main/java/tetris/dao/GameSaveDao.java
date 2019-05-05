@@ -18,7 +18,8 @@ public interface GameSaveDao {
      * Returns all saved games.
      *
      * @return List of all saved games
-     * @throws java.lang.Exception if exception occurs during retrieving all saves
+     * @throws java.lang.Exception if exception occurs during retrieving all
+     * saves
      */
     public List<GameSaveData> getAll() throws Exception;
 
@@ -29,4 +30,5 @@ public interface GameSaveDao {
      * @throws java.lang.Exception if exception occurs when deleting save
      */
     public void delete(long id) throws Exception;
+
 }

@@ -1,6 +1,7 @@
 package tetris.ui;
 
 import java.io.IOException;
+import java.sql.DriverManager;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -29,8 +30,8 @@ public class MainApp extends Application {
         scene.getStylesheets().add("/styles/Styles.css");
         paneManager = new PaneManager(scene);
         try {
-            highscoreDao = new DbHighscoreDao("jdbc:sqlite::memory:");
-            gameSaveDao = new DbGameSaveDao("jdbc:sqlite::memory:");
+            highscoreDao = new DbHighscoreDao(DriverManager.getConnection("jdbc:sqlite::memory:"));
+            gameSaveDao = new DbGameSaveDao(DriverManager.getConnection("jdbc:sqlite::memory:"));
         } catch (Exception ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error when initializing highscoreDao, closing program.\n" + ex.toString());
             alert.showAndWait();

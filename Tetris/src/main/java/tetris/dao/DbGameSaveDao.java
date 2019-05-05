@@ -8,21 +8,21 @@ import tetris.domain.Game;
 import tetris.domain.GameSaveData;
 
 /**
- * Handles reading and writing game savesd to SQLite database.
+ * Handles reading and writing game saved to SQLite database.
  */
 public class DbGameSaveDao implements GameSaveDao {
 
-    private Connection connection;
-    private Gson gson = new Gson();
+    private final Connection connection;
+    private final Gson gson = new Gson();
 
     /**
      * Creates new DbGameSaveDao.
      *
-     * @param connectionUrl Url used to connect to SQLite
+     * @param connection Connection to use in all operations
      * @throws SQLException if connecting to database fails
      */
-    public DbGameSaveDao(String connectionUrl) throws SQLException {
-        this.connection = DriverManager.getConnection(connectionUrl);
+    public DbGameSaveDao(Connection connection) throws SQLException {
+        this.connection = connection;
         createDb();
     }
 
