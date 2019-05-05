@@ -114,6 +114,8 @@
                 <configuration>
                     <excludes>
                         <exclude>tetris/ui/**/*</exclude>
+                        <exclude>com/google/**</exclude>
+                        <exclude>org/sqlite/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
