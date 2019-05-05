@@ -10,7 +10,7 @@ public interface GameSaveDao {
      *
      * @param game Game to save.
      * @return id for the created save
-     * @throws java.lang.Exception 
+     * @throws java.lang.Exception if exception occurs during saving the file
      */
     public long save(GameSaveData game) throws Exception;
 
@@ -18,7 +18,7 @@ public interface GameSaveDao {
      * Returns all saved games.
      *
      * @return List of all saved games
-     * @throws java.lang.Exception 
+     * @throws java.lang.Exception if exception occurs during retrieving all saves
      */
     public List<GameSaveData> getAll() throws Exception;
 
@@ -26,7 +26,7 @@ public interface GameSaveDao {
      * Removes save with given id.
      *
      * @param id id of save to delete
-     * @throws java.lang.Exception 
+     * @throws java.lang.Exception if exception occurs when deleting save
      */
     public void delete(long id) throws Exception;
 }

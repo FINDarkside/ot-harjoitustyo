@@ -19,7 +19,7 @@ public class DbGameSaveDao implements GameSaveDao {
      * Creates new DbGameSaveDao.
      *
      * @param connectionUrl Url used to connect to SQLite
-     * @throws SQLException 
+     * @throws SQLException if connecting to database fails
      */
     public DbGameSaveDao(String connectionUrl) throws SQLException {
         this.connection = DriverManager.getConnection(connectionUrl);
@@ -29,7 +29,7 @@ public class DbGameSaveDao implements GameSaveDao {
     /**
      * {@inheritDoc}
      *
-     * @throws SQLException 
+     * @throws SQLException if there's error executing sql query
      */
     @Override
     public long save(GameSaveData gameSave) throws SQLException {
@@ -48,7 +48,7 @@ public class DbGameSaveDao implements GameSaveDao {
     /**
      * {@inheritDoc}
      *
-     * @throws SQLException 
+     * @throws SQLException if there's error executing sql query
      */
     @Override
     public List<GameSaveData> getAll() throws SQLException {
@@ -66,7 +66,7 @@ public class DbGameSaveDao implements GameSaveDao {
     /**
      * {@inheritDoc}
      *
-     * @throws SQLException 
+     * @throws SQLException if there's error executing sql query
      */
     @Override
     public void delete(long id) throws SQLException {

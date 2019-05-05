@@ -16,7 +16,7 @@ public class DbHighscoreDao implements HighscoreDao {
      * Creates new DbHighscoreDao.
      *
      * @param connectionUrl Url used to connect to SQLite
-     * @throws SQLException 
+     * @throws SQLException if connecting to database fails
      */
     public DbHighscoreDao(String connectionUrl) throws SQLException {
         this.connection = DriverManager.getConnection(connectionUrl);
@@ -26,7 +26,7 @@ public class DbHighscoreDao implements HighscoreDao {
     /**
      * {@inheritDoc}
      *
-     * @throws SQLException
+     * @throws SQLException if there's error executing sql query
      */
     @Override
     public void create(Highscore highscore) throws SQLException {
@@ -41,7 +41,7 @@ public class DbHighscoreDao implements HighscoreDao {
     /**
      * {@inheritDoc}
      *
-     * @throws SQLException
+     * @throws SQLException if there's error executing sql query
      */
     @Override
     public List<Highscore> getAll() throws SQLException {

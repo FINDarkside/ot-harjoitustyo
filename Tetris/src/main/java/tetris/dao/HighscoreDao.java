@@ -9,7 +9,7 @@ public interface HighscoreDao {
      * Creates new highscore.
      * 
      * @param highscore Score to add
-     * @throws Exception 
+     * @throws Exception if exception occurs when adding highscore
      */
     public void create(Highscore highscore) throws Exception;
 
@@ -17,7 +17,7 @@ public interface HighscoreDao {
      * Returns all highscores sorted descending by score.
      * 
      * @return List of all highscores, sorted descending by score.
-     * @throws Exception 
+     * @throws Exception if exception occurs when getting all scores
      */
     public List<Highscore> getAll() throws Exception;
 }
