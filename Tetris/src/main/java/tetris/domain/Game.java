@@ -132,6 +132,22 @@ public class Game {
     }
 
     /**
+     * Calculates the position which the active tetromino will end up in without
+     * any input.
+     *
+     * @return y coordinate of the final position
+     */
+    public int predictDropLocation() {
+        float originalY = activeTetromino.getY();
+        while (!board.collidesWithStaticBlocks(activeTetromino) && activeTetromino.getMinY() > 0) {
+            activeTetromino.setY(activeTetromino.getY() - 1);
+        }
+        int result = (int) Math.ceil(activeTetromino.getY());
+        activeTetromino.setY(originalY);
+        return result;
+    }
+
+    /**
      * Moves the given block group down if it's falling. Block group is
      * considered falling, if none of its blocks have another block directly
      * below that's not falling and is not from the same group.

@@ -117,6 +117,8 @@ public class GameViewController implements Initializable {
             drawBlockGroup(group, gc);
         }
         drawBlockGroup(game.getActiveTetromino(), gc);
+        renderPredictedPosition();
+
         gc.setFill(Color.BLACK);
         gc.fillRect(1, 0, canvasWidth, 1);
         gc.fillRect(0, canvasHeight - 1, canvasWidth, canvasHeight - 2);
@@ -184,6 +186,16 @@ public class GameViewController implements Initializable {
         nextTetromino.setY(nextTetromino.getY() + (height / 2 - centerY) / pixelsPerCell);
 
         drawBlockGroup(nextTetromino, gc);
+    }
+
+    private void renderPredictedPosition() {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        int y = game.predictDropLocation();
+        Tetromino tetromino = game.getActiveTetromino();
+        float originalY = tetromino.getY();
+        tetromino.setY(y);
+        drawTetrominoBorders(tetromino, gc);
+        tetromino.setY(originalY);
     }
 
     @FXML
