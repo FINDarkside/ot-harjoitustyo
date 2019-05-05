@@ -2,7 +2,7 @@
 
 ## Rakenne
 
-Ohjelma jakautuu kahteen pakettiin, `tetris.domain` ja `tetris.ui`. Tarkoitus on vielä toteuttaa kolmas paketti, `dao` joka vastaa huipputuloksien ja tallennettujen pelien lukemisesta ja tallentamisesta.
+Ohjelma jakautuu kolmeen tasoon, `tetris.domain`, `tetris.dao` ja `tetris.ui`. `tetris.domain` vastaa pelin logiikasta. `tetris.dao` vastaa pelien ja huipputuloksien lukemisesta ja tallentamisesta. `tetris.domain` vastaa pelin käyttöliittymästä.
 
 #### Luokkakaavio
 
@@ -28,10 +28,11 @@ Pelin tärkein luokka on [Game](../../../tree/master/Tetris/src/main/java/tetris
 #### Pelin alustus - Sekvenssikaavio
 <img src="kuvat/sekvenssikaavio1.png">
 
+## Tiedon tallennus
 
-## Puuttuvat ominaisuudet ja muut heikkoudet
+`tetris.dao` paketin `DbGameSaveDao` ja `DbHighscoreDao` vastaa pysyvien tietojen lukemisesta ja tallentamisesta.
 
-* Tällä hetkellä pelin loputtua ainoa tapa aloittaa uusi, on käynnistää ohjelma uudestaan
-* Tällä hetkellä aktiivisen tetrominon pyörittäminen voi johtaa siihen että tetromino on osittain pelialueen ulkopuolella
-* Huipputuloksia ei ole vielä toteutettu
-* Mahdollisuutta tallentaa ja jatkaa peliä ei ole vielä toteutettu
+Peli käyttää SQLite tietokantaa pelien ja huipputuloksien tallentamiseen. SQLite tietokanta sijoitetaan aina samaan kansioon, kuin missä ajettava jar tiedosto sijaitsee. Mikäli tietokantaa ei löydy, ohjelma luo sellaisen.
+
+Testaukseen käytetään SQLiten im-memory moodia.
+
