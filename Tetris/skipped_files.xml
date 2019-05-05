@@ -5,8 +5,5 @@
     "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-    <suppress files="tetris.ui.GameViewController.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="tetris.ui.MenuController.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="tetris.ui.PaneManager.java" checks="[a-zA-Z0-9]*"/>
-    <suppress files="MainApp.java" checks="[a-zA-Z0-9]*"/>
+    <suppress files="tetris.ui.*" checks="[a-zA-Z0-9]*"/>
 </suppressions>
