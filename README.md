@@ -6,19 +6,23 @@ Kontrolleina toimivat nuolinäppäimet. Vasen ja oikea nuoli siirtää tippuvaa 
 
 ## Releaset
 
-[Viikko 5](https://github.com/FINDarkside/ot-harjoitustyo/releases/tag/viikko5)
+[Loppupalautus](https://github.com/FINDarkside/ot-harjoitustyo/releases/tag/1)
 
 [Viikko 6](https://github.com/FINDarkside/ot-harjoitustyo/releases/tag/viikko6)
 
-## Dokumentaatio
+[Viikko 5](https://github.com/FINDarkside/ot-harjoitustyo/releases/tag/viikko5)
 
-[Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
+## Dokumentaatio
 
 [Vaatimusmäärittely](dokumentaatio/vaatimusmäärittely.md)
 
 [Arkkitehtuuri](dokumentaatio/arkkitehtuuri.md)
 
 [Käyttöohjeet](dokumentaatio/käyttöohjeet.md)
+
+[Testausdokumentti](dokumentaatio/testaus.md)
+
+[Tuntikirjanpito](dokumentaatio/tuntikirjanpito.md)
 
 ## Komentorivitoiminnot
 
