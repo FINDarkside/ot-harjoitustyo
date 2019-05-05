@@ -18,7 +18,7 @@ DAO luokkia on testattu käyttämällä hyväksi SQLite tietokannan [in-memory](
 
 Käyttöliittymäluokkia lukuunottamatta testien rivikattavuus on 94% ja haarautumakattavuus 87%
 
-<img src="images/code-coverage.png">
+<img src="kuvat/code-coverage.png">
 
 Testaamatta jäi muutamia erityistapauksia, esim. tapauksia joissa inputLeft ei siirrä aktiivista tetriminoa 
 vasemmalle, koska tetromino on jo pelialueen vasemmassa reunassa.
