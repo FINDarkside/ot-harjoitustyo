@@ -100,7 +100,29 @@ public class GameBoardTest {
         Tetromino tetromino = new Tetromino(l, 0, 0);
         gameBoard.addTetromino(tetromino);
         gameBoard.clearRow(3);
-        assertEquals(2, gameBoard.getTetrominoes().size());   
+        assertEquals(2, gameBoard.getTetrominoes().size());
+    }
+
+    @Test
+    public void getUsedCellsExcludingTetrominoDoesNotThrowIfTetrominoIsOutOfBounds() {
+        List<Block> l = new ArrayList<>();
+        l.add(new Block("#000", -1000, 4));
+        l.add(new Block("#000", 4, -1000));
+        l.add(new Block("#000", 1000, 4));
+        l.add(new Block("#000", 4, 1000));
+        Tetromino tetromino = new Tetromino(l, 0, 0);
+        gameBoard.getUsedCellsExcludingTetromino(tetromino);
+    }
+
+    @Test
+    public void collidesWithStaticBlocksDoesNotThrowIfTetrominoIsOutOfBounds() {
+        List<Block> l = new ArrayList<>();
+        l.add(new Block("#000", -1000, 4));
+        l.add(new Block("#000", 4, -1000));
+        l.add(new Block("#000", 1000, 4));
+        l.add(new Block("#000", 4, 1000));
+        Tetromino tetromino = new Tetromino(l, 0, 0);
+        gameBoard.collidesWithStaticBlocks(tetromino);
     }
 
 }

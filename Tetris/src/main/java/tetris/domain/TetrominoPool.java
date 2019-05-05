@@ -12,8 +12,10 @@ public class TetrominoPool {
 
     /**
      * Creates new TetrominoPool.
+     * @param r Random instance to use
      */
-    public TetrominoPool() {
+    public TetrominoPool(Random r) {
+        this.r = r;
         this.generate();
     }
 

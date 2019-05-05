@@ -1,5 +1,7 @@
 package tetris.domain;
 
+import java.util.Random;
+
 public class Game {
 
     // Speed tetrominos fall at (blocks per second)
@@ -8,7 +10,7 @@ public class Game {
     private GameBoard board;
     private boolean paused;
     private Tetromino activeTetromino;
-    private TetrominoPool tetrominoPool = new TetrominoPool();
+    private TetrominoPool tetrominoPool;
     private int score = 0;
     private boolean gameOver = false;
 
@@ -19,9 +21,11 @@ public class Game {
      *
      * @param height Height of the game board in blocks
      * @param width Width of the game board in blocks
+     * @param r Random instance to use
      */
-    public Game(int height, int width) {
+    public Game(int height, int width, Random r) {
         this.board = new GameBoard(width, height);
+        tetrominoPool = new TetrominoPool(r);
         setNextTetromino();
     }
 

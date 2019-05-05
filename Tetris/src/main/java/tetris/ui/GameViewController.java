@@ -45,6 +45,14 @@ public class GameViewController implements Initializable {
     public void init(Game newGame) {
         this.game = newGame;
 
+        TetrominoFactory factory = new TetrominoFactory();
+        for (int i = 0; i < game.getBoard().getHeight(); i++) {
+            Tetromino t = factory.create(TetrominoType.I, "#333");
+            t.setX(game.getBoard().getWidth() / 2);
+            t.setY(i + 1);
+            game.getBoard().addTetromino(t);
+        }
+
         Scene scene = canvas.getScene();
         scene.setOnKeyPressed((KeyEvent event) -> {
             switch (event.getCode()) {

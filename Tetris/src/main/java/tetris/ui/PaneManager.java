@@ -1,5 +1,6 @@
 package tetris.ui;
 
+import java.util.Random;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,7 +29,7 @@ public class PaneManager {
     }
 
     public void openGameView() {
-        openGameView(new Game(20, 10));
+        openGameView(new Game(20, 10, new Random()));
     }
 
     public void openGameView(Game game) {
