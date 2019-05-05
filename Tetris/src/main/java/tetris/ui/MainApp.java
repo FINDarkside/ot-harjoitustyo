@@ -1,6 +1,8 @@
 package tetris.ui;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.DriverManager;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -30,10 +32,11 @@ public class MainApp extends Application {
         scene.getStylesheets().add("/styles/Styles.css");
         paneManager = new PaneManager(scene);
         try {
-            highscoreDao = new DbHighscoreDao(DriverManager.getConnection("jdbc:sqlite::memory:"));
-            gameSaveDao = new DbGameSaveDao(DriverManager.getConnection("jdbc:sqlite::memory:"));
+            String currentPath = new File(MainApp.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
+            highscoreDao = new DbHighscoreDao(DriverManager.getConnection("jdbc:sqlite:" + Paths.get(currentPath, "tetris.db")));
+            gameSaveDao = new DbGameSaveDao(DriverManager.getConnection("jdbc:sqlite:" + Paths.get(currentPath, "tetris.db")));
         } catch (Exception ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Error when initializing highscoreDao, closing program.\n" + ex.toString());
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error when initializing db connections , closing program.\n" + ex.toString());
             alert.showAndWait();
             Platform.exit();
             System.exit(0);
