@@ -16,7 +16,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import tetris.MainApp;
 import tetris.domain.*;
 
 public class GameViewController implements Initializable {

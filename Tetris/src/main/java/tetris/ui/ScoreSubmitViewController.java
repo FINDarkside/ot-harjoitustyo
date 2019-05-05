@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import tetris.MainApp;
 import tetris.domain.Highscore;
 
 public class ScoreSubmitViewController implements Initializable {

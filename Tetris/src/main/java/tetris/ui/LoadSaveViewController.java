@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import tetris.MainApp;
 import tetris.domain.GameSaveData;
 
 public class LoadSaveViewController implements Initializable {
