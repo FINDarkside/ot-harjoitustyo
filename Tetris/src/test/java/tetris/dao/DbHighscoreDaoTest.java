@@ -3,7 +3,9 @@ package tetris.dao;
 import java.sql.*;
 import java.util.*;
 import org.junit.*;
+import tetris.dao.DbHighscoreDao;
 import static org.junit.Assert.*;
+import tetris.domain.Highscore;
 import tetris.domain.Highscore;
 
 public class DbHighscoreDaoTest {
@@ -22,28 +24,28 @@ public class DbHighscoreDaoTest {
         connection.close();
     }
 
-    // @Test
+    @Test
     public void canAddScore() throws SQLException {
         hsDao.save(new Highscore(0, "test", "2018-03-01"));
         assertEquals(1, hsDao.getAll().size());
     }
 
-    // @Test
+    @Test
     public void canAddMultipleScores() throws SQLException {
         hsDao.save(new Highscore(0, "test", "2018-03-01"));
         hsDao.save(new Highscore(0, "test", "2018-03-01"));
         assertEquals(2, hsDao.getAll().size());
     }
 
-    // @Test
+    @Test
     public void getAllReturnsScoresInCorrectOrder() throws SQLException {
         hsDao.save(new Highscore(10, "test", "2018-03-01"));
         hsDao.save(new Highscore(1, "test", "2018-03-01"));
         hsDao.save(new Highscore(60, "test", "2018-03-01"));
         List<Highscore> scores = hsDao.getAll();
         assertEquals(60, scores.get(0).getScore());
-        assertEquals(10, scores.get(0).getScore());
-        assertEquals(1, scores.get(0).getScore());
+        assertEquals(10, scores.get(1).getScore());
+        assertEquals(1, scores.get(2).getScore());
 
     }
 

@@ -3,8 +3,11 @@ package tetris.dao;
 import java.sql.*;
 import java.util.*;
 import org.junit.*;
+import tetris.dao.DbGameSaveDao;
 import static org.junit.Assert.*;
 import tetris.domain.Game;
+import tetris.domain.Game;
+import tetris.domain.GameSaveData;
 import tetris.domain.GameSaveData;
 
 public class DbGameSaveDaoTest {
@@ -23,20 +26,20 @@ public class DbGameSaveDaoTest {
         connection.close();
     }
 
-    // @Test
+    @Test
     public void canAddSaves() throws SQLException {
         gameSaveDao.save(new GameSaveData(new Game(20, 10), "test", "2018-02-01"));
         assertEquals(1, gameSaveDao.getAll().size());
     }
 
-    // @Test
+    @Test
     public void canDeleteSaves() throws SQLException {
         long id = gameSaveDao.save(new GameSaveData(new Game(20, 10), "test", "2018-02-01"));
         gameSaveDao.delete(id);
         assertEquals(0, gameSaveDao.getAll().size());
     }
 
-    // @Test
+    @Test
     public void getAllReturnsAllSaves() throws SQLException {
         for (int i = 0; i < 10; i++) {
             gameSaveDao.save(new GameSaveData(new Game(20, 10), "test", "2018-02-01"));

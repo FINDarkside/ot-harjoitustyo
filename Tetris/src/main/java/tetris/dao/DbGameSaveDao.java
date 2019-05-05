@@ -34,7 +34,6 @@ public class DbGameSaveDao implements GameSaveDao {
     @Override
     public long save(GameSaveData gameSave) throws SQLException {
         String gameJson = gson.toJson(gameSave.getGame());
-        System.out.println(gameJson);
         PreparedStatement statement = connection.prepareStatement("INSERT INTO gamesave VALUES(?, ?, ?)");
         statement.setString(1, gameSave.getName());
         statement.setString(2, gameJson);
