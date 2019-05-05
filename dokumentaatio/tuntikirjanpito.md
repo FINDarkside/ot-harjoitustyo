@@ -17,4 +17,5 @@
 |  | 1    | Debuggaus, "tyhjän päälle" jääneet tetrominot eivät välillä tipu alaspäin [#1](https://github.com/FINDarkside/ot-harjoitustyo/issues/1)  |
 |  | 2    | Pelinäkymän parantaminen, [#1](https://github.com/FINDarkside/ot-harjoitustyo/issues/1) korjaaminen  |
 |  | 1    | käyttöohjeet, arkkitehtuuri  |
-| Yhteensä   | 25   | | 
+| 4.5  | 5    | leaderboards toiminnallisuus (sqlite) ja siihen liittyvät näkymät  |
+| Yhteensä   | 30   | | 
