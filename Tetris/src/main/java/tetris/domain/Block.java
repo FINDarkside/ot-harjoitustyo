@@ -1,7 +1,5 @@
 package tetris.domain;
 
-import javafx.scene.paint.Color;
-
 public class Block {
 
     private String color;

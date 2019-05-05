@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class TetrominoPool {
 
+    private Random r = new Random();
     private ArrayList<Tetromino> pool = new ArrayList<>();
     TetrominoFactory factory = new TetrominoFactory();
 

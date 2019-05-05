@@ -1,7 +1,5 @@
 package tetris.domain;
 
-import java.util.ArrayList;
-
 public class Game {
 
     // Speed the block group drops at (blocks per second)
@@ -211,6 +209,14 @@ public class Game {
 
     public TetrominoPool getTetrominoPool() {
         return tetrominoPool;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 
 }

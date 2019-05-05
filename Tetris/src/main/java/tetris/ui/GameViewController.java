@@ -2,23 +2,19 @@ package tetris.ui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import tetris.MainApp;
 import tetris.domain.*;
@@ -28,11 +24,11 @@ public class GameViewController implements Initializable {
     @FXML
     private Canvas canvas;
     @FXML
-    private AnchorPane canvasContainer;
-    @FXML
     private Canvas nextTetrominoCanvas;
     @FXML
     private Label scoreLabel;
+    @FXML
+    private Button pauseButton;
 
     private float pixelsPerCell = 25;
     private int borderWidth = 2;
@@ -45,33 +41,38 @@ public class GameViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.game = new Game(20, 10);
-        System.out.println("NEW GAME");
-        canvasHeight = 20 * pixelsPerCell;
-        canvasWidth = 10 * pixelsPerCell;
-        canvas.setWidth(canvasWidth);
-        canvas.setHeight(canvasHeight);
-        startGameLoop();
     }
 
-    public void setupListeners() {
+    public void init(Game newGame) {
+        this.game = newGame;
+
         Scene scene = canvas.getScene();
         scene.setOnKeyPressed((KeyEvent event) -> {
             switch (event.getCode()) {
                 case UP:
                     game.inputRotate();
+                    event.consume();
                     break;
                 case DOWN:
                     game.inputDown();
+                    event.consume();
                     break;
                 case LEFT:
                     game.inputLeft();
+                    event.consume();
                     break;
                 case RIGHT:
                     game.inputRight();
+                    event.consume();
                     break;
             }
         });
+
+        canvasHeight = 20 * pixelsPerCell;
+        canvasWidth = 10 * pixelsPerCell;
+        canvas.setWidth(canvasWidth);
+        canvas.setHeight(canvasHeight);
+        startGameLoop();
     }
 
     private void startGameLoop() {
@@ -89,8 +90,8 @@ public class GameViewController implements Initializable {
                     controller.render();
                     scoreLabel.setText("" + game.getScore());
                     if (game.isGameOver()) {
-                        gameEnd();
                         animator.stop();
+                        gameEnd();
                     }
                 } catch (Exception ex) {
                     animator.stop();
@@ -186,4 +187,46 @@ public class GameViewController implements Initializable {
         drawBlockGroup(nextTetromino, gc);
     }
 
+    @FXML
+    private void pauseClicked(ActionEvent event) {
+        game.setPaused(!game.isPaused());
+        if (game.isPaused()) {
+            pauseButton.setText("Continue");
+        } else {
+            pauseButton.setText("Pause");
+        }
+    }
+
+    @FXML
+    private void menuClicked(ActionEvent event) {
+        animator.stop();
+        MainApp.instance.getPaneManager().openMenu();
+    }
+
+    @FXML
+    private void saveClicked(ActionEvent event) {
+        animator.stop();
+        TextInputDialog td = new TextInputDialog("");
+        td.setTitle("Save name");
+        td.setHeaderText("Set save name");
+        td.setContentText("Name");
+        Optional<String> result = td.showAndWait();
+        if (!result.isPresent()) {
+            animator.start();
+            return;
+        }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        GameSaveData saveData = new GameSaveData(game, result.get(), dateFormat.format(date));
+        try {
+            MainApp.instance.getGameSaveDao().save(saveData);
+        } catch (Exception ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to save game.\n" + ex.toString());
+            alert.showAndWait();
+            animator.start();
+            return;
+        }
+        MainApp.instance.getPaneManager().openMenu();
+    }
 }

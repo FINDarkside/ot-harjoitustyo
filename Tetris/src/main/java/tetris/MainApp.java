@@ -8,8 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import tetris.dao.HighscoreDao;
-import tetris.dao.DbHighscoreDao;
+import tetris.dao.*;
 import tetris.ui.PaneManager;
 
 public class MainApp extends Application {
@@ -18,6 +17,7 @@ public class MainApp extends Application {
     private static Scene scene;
     private PaneManager paneManager;
     private HighscoreDao highscoreDao;
+    private GameSaveDao gameSaveDao;
 
     public MainApp() {
         instance = this;
@@ -26,11 +26,12 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Menu.fxml"));
-        this.scene = new Scene(root);
+        scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         paneManager = new PaneManager(scene);
         try {
             highscoreDao = new DbHighscoreDao("jdbc:sqlite::memory:");
+            gameSaveDao = new DbGameSaveDao("jdbc:sqlite::memory:");
         } catch (Exception ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error when initializing highscoreDao, closing program.\n" + ex.toString());
             alert.showAndWait();
@@ -52,6 +53,10 @@ public class MainApp extends Application {
 
     public HighscoreDao getHighscoreDao() {
         return highscoreDao;
+    }
+
+    public GameSaveDao getGameSaveDao() {
+        return gameSaveDao;
     }
 
 }

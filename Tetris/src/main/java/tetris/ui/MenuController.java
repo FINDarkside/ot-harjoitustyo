@@ -1,7 +1,5 @@
 package tetris.ui;
 
-import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -27,8 +25,18 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void startGameClicked(ActionEvent event) throws IOException, InterruptedException {
+    private void startGameClicked(ActionEvent event) {
         MainApp.instance.getPaneManager().openGameView();
+    }
+    
+    @FXML
+    private void openScoreBoardClicked(ActionEvent event) {
+        MainApp.instance.getPaneManager().openHighscoreView();
+    }
+
+    @FXML
+    private void loadGameClicked(ActionEvent event) {
+        MainApp.instance.getPaneManager().openLoadSaveView();
     }
 
 }
