@@ -5,26 +5,30 @@
 Sovellus on [tetris](https://en.wikipedia.org/wiki/Tetris#Gameplay) peli. Pelissä on siis idea muodostaa horisontaalisia rivejä palikoilla joita tippuu pelialueen yläreunasta.
 Kun rivi on valmis, sen rivin palikat poistuvat. Peli loppuu kun joku palikka ei enää mahdu pelialueelle. En lähde tässä ruotimaan tarkemmin tetriksen perusideaa, yllä on linkki wikipedia artikkeliin. Toteutettava peli ei välttämättä vastaa alkuperäistä tetristä kaikilta osin, mutta tästä lisää myöhemmin toiminnallisuuksissa.
 
-## Suunnitellut toiminnallisuudet
+## Toiminnallisuudet
 
 * Perus tetris toiminnallisuus
   * Palikoita tippuu yksi kerrallaan
   * Valmis horisontaalinen rivi poistaa sen rivin palikat
   * Palikoita voi pyörittää
   * Palikat tippuvat tiettyä vauhtia alaspäin
-  * Palikoiden tippumista voi nopeuttaa
+  * Palikan voi tiputtaa ilman odotusta
 * Rivien poistamisesta saa pisteitä
 * Leaderboards toiminnallisuus. Eli lista korkeimmista pisteistä ja nimimerkeistä
+* Pelin voi keskeyttää ja jatkaa myöhemmin
+* Pelin voi tallentaa ja vanhaa peliä voi jatkaa myöhemmin (vaikka ohjelma olisi suljettu välillä)
 
-Mahdollisia toiminnallisuuksia mikäli aikaa riittää:
-
-* Mahdollisuus tallentaa ja ladata keskeneräisiä pelejä
-* Ei rumat grafiikat
-* Erilaisia säätöjä ja asetuksia peliin. Mahdollisesti esimerkiksi käyttäjän luomia palikoita (esim 1x4 palikka) tai jonkuntapaisia erikoispalikoita.
-
-Käyttöliittymään mahdollisia näkymiä:
+## Käyttöliittymään näkymät:
 
 * Päänäkymä - Sisältää painikkeet pelin aloitukseen, scoreboardille ja mahdollisesti muihin asioihin riippuen toteutetuista ominaisuuksista
 * Pelinäkymä - Sisältää itse pelin
-* Scoreboard - Sisältää huipputulokset
-* Asetukset - Näkymä asetusten muuttamiselle mikäli ominaisuus toteutetaan
+* Huipputulos näkymä - Tulokset järjestetty pisteitten mukaan laskevasti
+* Tallennettujen pelien selaus näkymä - Näkymässä voi ladata ja poistaa tallennettuja pelejä
+* Näkymä uuden huipputuloksen lisäämiselle
+
+## Jatkokehitysideoita
+
+* Erilaisia asetuksia, esim. suurempi pelikenttä
+* Responsiivisempi käyttöliittymä
+* Kauniimpi käyttöliittymä
+* Paremmat kontrollit, jotta voisi esim. pitää vasenta nuolta pohjassa eikä pitäisi naputella
