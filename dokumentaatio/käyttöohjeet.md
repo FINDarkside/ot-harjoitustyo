@@ -10,7 +10,7 @@ Käynnistä jar tiedosto komennolla `java -jar Tetris.jar`
 
 * Pelin voi aloittaa painamalla "Play"
 * "Scoreboad" siirtyy huipputulos näkymään
-* "Load game" siirtyy tallennetun pelin listaus näkymään
+* "Load game" siirtyy tallennetun pelien näkymään
 
 ## Pelinäkymä
 
@@ -33,7 +33,14 @@ Kun koko rivi on täynnä, rivi poistuu ja saat yhden pisteen. Pisteet näkyvät
 
 Peli päättyy kun palikkakasan ylin palikka ei enää mahdu pelialueelle.
 
-## Tallennetun pelin lataus näkymä
+### Pelin tallentaminen
+
+Kun painat pelinäkymällä "Save" nappia, ohjelma kysyy sinulta pelitallennukselle nimeä, minkä jälkeen peli tallennetaan ja 
+ohjelma siirtyy päävalikkoon.
+
+<img src="kuvat/save-game.png">
+
+## Tallennettujen pelien näkymä
 
 <img src="kuvat/load-game-view.png">
 
@@ -42,3 +49,11 @@ Näkymässä on listattu kaikki tallennetut pelit, niille annetut nimet, pelin s
 * "Load" nappi lataa kyseisen pelin, ja siirtyy pelinäkymään
 * "Delete" nappi poistaa kyseisen pelin pysyvästi
 * "Back to memu" nappia painamalla ohjelma siirtyy takaisin päävalikkoon
+
+## Huipputulos näkymä
+
+<img src="kuvat/scoreboard.png">
+
+Näkymässä on listattu kaikkien loppuneiden pelien tulokset. Pelit on järjestetty korkeimmasta pistemäärästä matalimpaan.
+
+* "Main menu" nappia painamalla ohjelma siirtyy takaisin päävalikkoon
