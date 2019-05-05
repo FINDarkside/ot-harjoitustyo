@@ -19,4 +19,5 @@
 |  | 1    | käyttöohjeet, arkkitehtuuri  |
 | 4.5  | 5    | leaderboards toiminnallisuus (sqlite) ja siihen liittyvät näkymät  |
 | 5.5  | 3    | Pelien tallennus toiminnallisuus ja siihen liittyvät näkymät  |
-| Yhteensä   | 33   | | 
+|  | 4    | Pelin ja dokumentaation viimeistely  |
+| Yhteensä   | 37   | | 
