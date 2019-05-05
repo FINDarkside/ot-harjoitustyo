@@ -10,20 +10,18 @@ Ohjelma jakautuu kolmeen tasoon, `tetris.domain`, `tetris.dao` ja `tetris.ui`. `
 
 ## Käyttöliittymä
 
-Käyttöliittymään kuuluu tällä hetkellä kaksi näkymää:
-* Valikko
+Käyttöliittymään kuuluu 5 eri näkymää:
+* Päävalikko
 * Pelinäkymä
+* "Game over" näkymä
+* Huipputulos näkymä
+* Tallennettujen pelien näkymä
 
-Tarkoitus on vielä lisätä seuraavat näkymät:
-
-* Huipputulokset
-* Tallennetut (keskeneräiset) pelit
-
-Näkymät on eriytetty pelin logiikasta. Näkymät on määritelty fxml tiedostoina sen sijaan että näkymät luotaisiin koodissa.
+Näkymät on eriytetty pelin logiikasta. Näkymät on suurimmaksi osaksi toteutettu fxml merkintäkielellä sen sijaan että näkymät luotaisiin koodissa. Näkymien logiikasta vastaavat kontrollerit jotka on nimetty näkymien mukaan. Esim `GameView` näkymän kontrolleri on `GameViewController`.
 
 ## Sovelluslogiikka
 
-Pelin tärkein luokka on [Game](../../../tree/master/Tetris/src/main/java/tetris/domain/Game.java) joka vastaa koko pelilogiikasta. Luokan julkiset metodit ovat update metodin lisäksi lähinnä gettereitä ja settereitä. `void update(float dt)` on ainoa julkinen metodi joka muuttaa pelin tilaa.
+Pelin tärkein luokka on [Game](../../../tree/master/Tetris/src/main/java/tetris/domain/Game.java) joka vastaa koko pelilogiikasta. Luokan julkiset metodit ovat update metodin lisäksi lähinnä gettereitä ja settereitä. `void update(float dt)` on ainoa julkinen metodi joka muuttaa pelin tilaa. 
 
 #### Pelin alustus - Sekvenssikaavio
 <img src="kuvat/sekvenssikaavio1.png">
