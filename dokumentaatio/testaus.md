@@ -16,7 +16,7 @@ DAO luokkia on testattu käyttämällä hyväksi SQLite tietokannan [in-memory](
 
 ## Testauskattavuus
 
-Käyttöliittymäluokkia lukuunottamatta testien rivikattavuus on 94% ja haarautumakattavuus 87%
+Käyttöliittymäluokkia lukuunottamatta testien rivikattavuus on 95% ja haarautumakattavuus 87%
 
 <img src="kuvat/code-coverage.png">
 
