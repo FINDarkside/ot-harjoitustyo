@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>tetris.MainApp</mainClass>
+        <mainClass>tetris.ui.MainApp</mainClass>
     </properties>
 
     <organization>
@@ -80,7 +80,7 @@
                     </execution>
                 </executions> 
                 <configuration>
-                    <mainClass>tetris.MainApp</mainClass>
+                    <mainClass>tetris.ui.MainApp</mainClass>
                     <arguments></arguments>
                     <systemProperties></systemProperties>
                 </configuration> 
