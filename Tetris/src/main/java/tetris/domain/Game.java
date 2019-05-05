@@ -141,14 +141,7 @@ public class Game {
      * @return true if the block group was falling, otherwise false
      */
     private boolean moveBlockGroupIfFalling(Tetromino group, float dt) {
-        boolean[][] usedCells = board.getUsedCells();
-        for (Block block : group.getBlocks()) {
-            int x = group.getBlockCellX(block);
-            int y = group.getBlockCellY(block);
-            if (x >= 0 && x < board.getWidth() && y >= 0 && y < board.getHeight()) {
-                usedCells[y][x] = false;
-            }
-        }
+        boolean[][] usedCells = board.getUsedCellsExcludingTetromino(group);
         for (Block block : group.getBlocks()) {
             int x = group.getBlockCellX(block);
             int y = group.getBlockCellY(block);

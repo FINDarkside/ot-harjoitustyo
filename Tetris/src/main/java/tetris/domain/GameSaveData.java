@@ -7,13 +7,28 @@ public class GameSaveData {
     private final String name;
     private final String date;
 
-    public GameSaveData(Game game, String name, String saveDate) {
+    /**
+     * Creates new GameSaveData.
+     *
+     * @param game game instance
+     * @param name name of the save
+     * @param date save date
+     */
+    public GameSaveData(Game game, String name, String date) {
         this.id = null;
         this.game = game;
         this.name = name;
-        this.date = saveDate;
+        this.date = date;
     }
 
+    /**
+     * Creates new GameSaveData.
+     *
+     * @param id id representing the save
+     * @param game game instance
+     * @param name name of the save
+     * @param date save date
+     */
     public GameSaveData(Long id, Game game, String name, String date) {
         this.id = id;
         this.game = game;

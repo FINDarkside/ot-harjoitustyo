@@ -5,15 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 import tetris.domain.Highscore;
 
+/**
+ * Handles reading/writing highscores to SQLite database.
+ */
 public class DbHighscoreDao implements HighscoreDao {
 
     private final Connection connection;
 
+    /**
+     * Creates new DbHighscoreDao.
+     *
+     * @param connectionUrl Url used to connect to SQLite
+     * @throws SQLException 
+     */
     public DbHighscoreDao(String connectionUrl) throws SQLException {
         this.connection = DriverManager.getConnection(connectionUrl);
         createDb();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws SQLException
+     */
     @Override
     public void create(Highscore highscore) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("INSERT INTO highscore VALUES(?, ?, ?)");
@@ -24,6 +38,11 @@ public class DbHighscoreDao implements HighscoreDao {
         statement.close();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws SQLException
+     */
     @Override
     public List<Highscore> getAll() throws SQLException {
         Statement statement = connection.createStatement();

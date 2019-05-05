@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import tetris.dao.*;
-import tetris.ui.PaneManager;
 
 public class MainApp extends Application {
 

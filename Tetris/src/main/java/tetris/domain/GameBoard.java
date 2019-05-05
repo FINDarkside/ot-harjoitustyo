@@ -41,6 +41,25 @@ public class GameBoard {
         return usedCells;
     }
 
+    /**
+     * Calculates the occupied cells on the game board, excluding the tetromino
+     * given as argument.
+     *
+     * @param tetromino tetromino to exlude from results
+     * @return 2d boolean array indicating which cells are occupied
+     */
+    public boolean[][] getUsedCellsExcludingTetromino(Tetromino tetromino) {
+        boolean[][] usedCells = getUsedCells();
+        for (Block block : tetromino.getBlocks()) {
+            int x = tetromino.getBlockCellX(block);
+            int y = tetromino.getBlockCellY(block);
+            if (x >= 0 && x < getWidth() && y >= 0 && y < getHeight()) {
+                usedCells[y][x] = false;
+            }
+        }
+        return usedCells;
+    }
+
     public List<Tetromino> getBlockGroups() {
         return blockGroups;
     }
@@ -77,29 +96,13 @@ public class GameBoard {
      */
     public void clearRow(int y) {
         for (int j = blockGroups.size() - 1; j >= 0; j--) {
-            Tetromino group = blockGroups.get(j);
-            List<Block> blocks = group.getBlocks();
-            boolean blocksRemoved = false;
-            for (int i = blocks.size() - 1; i >= 0; i--) {
-                if (group.getBlockCellY(blocks.get(i)) == y) {
-                    blocks.remove(i);
-                    blocksRemoved = true;
-                }
+            Tetromino tetromino = blockGroups.get(j);
+            Tetromino newTetromino = tetromino.removeBlockOnRow(y);
+            if (newTetromino != null) {
+                this.blockGroups.add(newTetromino);
             }
-            if (blocksRemoved) {
-                ArrayList<Block> newTetrominoBlocks = new ArrayList<>();
-                for (int i = blocks.size() - 1; i >= 0; i--) {
-                    if (group.getBlockCellY(blocks.get(i)) > y) {
-                        newTetrominoBlocks.add(blocks.remove(i));
-                    }
-                }
-                if (!newTetrominoBlocks.isEmpty()) {
-                    Tetromino newTetromino = new Tetromino(newTetrominoBlocks, group.getX(), group.getY());
-                    this.blockGroups.add(newTetromino);
-                }
-                if (blocks.isEmpty()) {
-                    blockGroups.remove(j);
-                }
+            if (tetromino.getBlocks().isEmpty()) {
+                blockGroups.remove(j);
             }
         }
     }

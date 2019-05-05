@@ -45,6 +45,40 @@ public class Tetromino {
         }
     }
 
+    /**
+     * Removes all blocks in the given row.
+     *
+     * @param y row to clear
+     * @return new tetromino if removing blocks split tetromino in half,
+     * otherwise null
+     */
+    public Tetromino removeBlockOnRow(int y) {
+        boolean blocksRemoved = false;
+        for (int i = blocks.size() - 1; i >= 0; i--) {
+            if (getBlockCellY(blocks.get(i)) == y) {
+                blocks.remove(i);
+                blocksRemoved = true;
+            }
+        }
+        if (blocksRemoved) {
+            return splitTetromino(y);
+        }
+        return null;
+    }
+
+    private Tetromino splitTetromino(int y) {
+        ArrayList<Block> newTetrominoBlocks = new ArrayList<>();
+        for (int i = blocks.size() - 1; i >= 0; i--) {
+            if (getBlockCellY(blocks.get(i)) > y) {
+                newTetrominoBlocks.add(blocks.remove(i));
+            }
+        }
+        if (newTetrominoBlocks.isEmpty()) {
+            return null;
+        }
+        return new Tetromino(newTetrominoBlocks, getX(), getY());
+    }
+
     public List<Block> getBlocks() {
         return blocks;
     }

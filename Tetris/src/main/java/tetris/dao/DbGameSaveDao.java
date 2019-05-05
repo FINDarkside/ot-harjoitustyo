@@ -7,16 +7,30 @@ import java.util.List;
 import tetris.domain.Game;
 import tetris.domain.GameSaveData;
 
+/**
+ * Handles reading and writing game savesd to SQLite database.
+ */
 public class DbGameSaveDao implements GameSaveDao {
 
     private Connection connection;
     private Gson gson = new Gson();
 
+    /**
+     * Creates new DbGameSaveDao.
+     *
+     * @param connectionUrl Url used to connect to SQLite
+     * @throws SQLException 
+     */
     public DbGameSaveDao(String connectionUrl) throws SQLException {
         this.connection = DriverManager.getConnection(connectionUrl);
         createDb();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws SQLException 
+     */
     @Override
     public long save(GameSaveData gameSave) throws SQLException {
         String gameJson = gson.toJson(gameSave.getGame());
@@ -31,6 +45,11 @@ public class DbGameSaveDao implements GameSaveDao {
         return rs.getLong(1);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws SQLException 
+     */
     @Override
     public List<GameSaveData> getAll() throws SQLException {
         Statement statement = connection.createStatement();
@@ -44,6 +63,11 @@ public class DbGameSaveDao implements GameSaveDao {
         return saves;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @throws SQLException 
+     */
     @Override
     public void delete(long id) throws SQLException {
         PreparedStatement statement = connection.prepareStatement("DELETE FROM gamesave WHERE rowid=?");

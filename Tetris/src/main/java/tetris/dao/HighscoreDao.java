@@ -5,6 +5,12 @@ import tetris.domain.Highscore;
 
 public interface HighscoreDao {
 
+    /**
+     * Creates new highscore.
+     * 
+     * @param highscore Score to add
+     * @throws Exception 
+     */
     public void create(Highscore highscore) throws Exception;
 
     /**
