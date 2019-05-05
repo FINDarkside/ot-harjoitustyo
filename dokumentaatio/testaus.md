@@ -34,3 +34,7 @@ Sovellusta on testattu käyttöohjeiden mukaan Windows ja Linux ympäristöissä
 ### Toiminnallisuudet
 
 Kaikki määrittelydokumentin toiminnallisuudet on käyty läpi, ja varmistettu että ne toimivat halutulla tavalla.
+
+## Sovellukseen jääneet laatuongelmat
+
+Monessa labelissa ja buttonissa on tarpeettomasti määritelty preferredWidth. Joillain tietokoneilla teksti on eri kokoista kuin omalla kehityskoneella, jolloin osa labeleitten ja buttoneiden tekstistä leikkautuu pois.
