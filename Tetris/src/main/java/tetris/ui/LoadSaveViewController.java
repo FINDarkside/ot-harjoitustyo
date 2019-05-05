@@ -62,7 +62,7 @@ public class LoadSaveViewController implements Initializable {
 
     private Label createLabel(double width, String text) {
         Label label = new Label(text);
-        label.setStyle("-fx-font: 16 System;");
+        label.setStyle("-fx-font: 16 Arial;");
         //label.setPrefHeight(25);
         label.setPrefWidth(width);
         return label;
@@ -70,7 +70,7 @@ public class LoadSaveViewController implements Initializable {
 
     private Button createButton(String text, EventHandler<ActionEvent> onClick) {
         Button button = new Button(text);
-        button.setStyle("-fx-font: 14 System;");
+        button.setStyle("-fx-font: 14 Arial;");
         button.setPrefWidth(66);
         button.onActionProperty().set(onClick);
         return button;
