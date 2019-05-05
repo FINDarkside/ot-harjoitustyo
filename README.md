@@ -39,14 +39,23 @@ mvn test
 ```
 mvn test jacoco:report
 ```
+Generoidun raportin sijainti: `target/site/jacoco/index.html`
+
 
 **Checkstyle**
 
 ```
 mvn jxr:jxr checkstyle:checkstyle
 ```
+Generoidun raportin sijainti: `target/site/checkstyle.html`
 
 **Jar tiedoston generointi**
 ```
 mvn package
 ```
+
+**JavaDoc**
+```
+mvn javadoc:javadoc
+```
+Generoidun dokumentaation sijainti: `target/site/apidocs/index.html`
